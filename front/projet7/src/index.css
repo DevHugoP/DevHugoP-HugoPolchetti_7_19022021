@@ -2,8 +2,33 @@ body {
 	background-color: #f0f2f5;
 }
 
+.acceuilContainer {
+	display: flex;
+}
+
+.blockLogo {
+	display: flex;
+	padding-left: 2rem;
+}
 .logoPageAcceuil {
-	width: 80%;
-	height: 2rem;
-	background-color: red;
+	padding-top: 1.5rem;
+	height: 25rem;
+}
+
+.acceuilTitle {
+	position: absolute;
+	top: 250px;
+	width: 25rem;
+	font-weight: 500;
+	font-size: 1.7rem;
+}
+
+.blockForm {
+	display: flex;
+}
+
+.formLogin {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 }
