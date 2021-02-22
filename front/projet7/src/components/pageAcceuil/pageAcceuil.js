@@ -23,6 +23,7 @@ const PageAcceuil = () => {
 							<div>
 								<input type="password" name="password" placeholder="Mot de passe" />
 							</div>
+							<button className="loginBtn">Login</button>
 						</form>
 					</div>
 				</div>
