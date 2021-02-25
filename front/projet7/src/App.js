@@ -5,7 +5,7 @@ function App() {
 	return (
 		<div className="container">
 			<Login />
-			{/* il faudra ajouter les components sur site ici  */}
+			{/* il faudra ajouter les components sur site ici + le router */}
 		</div>
 	);
 }
