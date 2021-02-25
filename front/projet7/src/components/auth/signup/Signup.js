@@ -1,4 +1,7 @@
-const PageAcceuil = () => {
+import React from "react";
+import "./Signup.css";
+
+const Signup = () => {
 	return (
 		<>
 			<div>
@@ -18,12 +21,15 @@ const PageAcceuil = () => {
 					<div className="blockForm">
 						<form className="formLogin">
 							<div>
-								<input type="text" name="email" placeholder="Adresse e-mail" />
+								<input type="email" name="email" placeholder="Adresse e-mail" />
 							</div>
 							<div>
 								<input type="password" name="password" placeholder="Mot de passe" />
 							</div>
-							<button className="loginBtn">Login</button>
+
+							<button className="loginBtn" type="submit">
+								Créer le compte
+							</button>
 						</form>
 					</div>
 				</div>
@@ -32,4 +38,4 @@ const PageAcceuil = () => {
 	);
 };
 
-export default PageAcceuil;
+export default Signup;

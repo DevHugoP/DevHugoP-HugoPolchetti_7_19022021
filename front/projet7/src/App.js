@@ -1,12 +1,12 @@
-import PageAcceuil from "./components/pageAcceuil/pageAcceuil";
+import Login from "./components/auth/login/Login";
+import Signup from "./components/auth/signup/Signup";
 
 function App() {
 	return (
 		<div className="container">
-			<PageAcceuil />
+			<Login />
 			{/* il faudra ajouter les components sur site ici  */}
 		</div>
 	);
 }
-
 export default App;
