@@ -12,7 +12,7 @@ const sequelize = new Sequelize("database_development", "root", "polchetti59", {
 
 sequelize
 	.authenticate()
-	.then(() => console.log("Database connected..."))
+	.then(() => console.log("Database connected !"))
 	.catch((err) => console.log("Error: " + err));
 
 const app = express();
