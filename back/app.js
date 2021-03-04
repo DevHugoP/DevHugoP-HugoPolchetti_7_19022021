@@ -1,7 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const messageRoutes = require("./routes/message");
+const userRoutes = require("./routes/user");
 const { Sequelize } = require("sequelize");
+const User = require("./models/User");
 
 // TEST DB
 
@@ -16,9 +19,40 @@ sequelize
 	.catch((err) => console.log("Error: " + err));
 
 const app = express();
+app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+// app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.get("/", (req, res) => res.send("INDEX"));
+// app.use((req, res, next) => {
+// 	res.setHeader("Access-Control-Allow-Origin", "*");
+// 	res.setHeader(
+// 		"Access-Control-Allow-Headers",
+// 		"Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+// 	);
+// 	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+// 	next();
+// });
 
-app.listen(PORT, console.log(`Server started on ${PORT}`));
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => res.send("TEST"));
+app.use("/api/messages", messageRoutes);
+app.use("/api/auth", userRoutes);
+
+app.post("/users", async (req, res) => {
+	const { idUSERS, usernames, password, email, isAdmin } = req.body;
+	try {
+		const user = await User.create({ idUSERS, usernames, password, email, isAdmin });
+
+		return res.json(user);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json(err);
+	}
+});
+
+// app.listen({ port: 3000 }, async () => {
+// 	console.log("server up");
+// 	await sequelize.sync({ force: true });
+// });
+module.exports = app;

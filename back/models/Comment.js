@@ -2,9 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Comments extends Model {
-		static associate(models) {
-			models.Comment.hasMany(models.User);
-		}
+		static associate(models) {}
 	}
 	Comments.init(
 		{
