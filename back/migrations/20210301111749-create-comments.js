@@ -1,6 +1,6 @@
 "use strict";
 module.exports = {
-	up: async (queryInterface, Sequelize) => {
+	up: async (queryInterface, Sequelize, DataTypes) => {
 		await queryInterface.createTable("Comments", {
 			id: {
 				allowNull: false,
@@ -8,9 +8,11 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
-			idCOMMENTS: {
+			uuid: {
 				allowNull: false,
-				type: Sequelize.INTEGER
+				type: Sequelize.UUID,
+				defaultValue: Sequelize.UUIDV4,
+				unique: true
 			},
 			content: {
 				allowNull: false,

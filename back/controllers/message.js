@@ -1,19 +1,20 @@
-const Message = require("../models/Message");
 const fs = require("fs");
+const Message = require("../models/Message");
+const db = require("../models");
 
-exports.createMessage = (req, res, next) => {
-	const messageObject = JSON.parse(req.body.message);
-	const sauce = new Sauce({
-		...messageObject,
-		imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-		likes: 0
+exports.createMessage = async (req, res, next) => {
+	const messageObject = req.body;
+	const message = await db.Message.create({
+		title: messageObject.title,
+		content: messageObject.content,
+		attachement: messageObject.attachement,
+		likes: messageObject.likes
 	});
-	sauce
-		.save()
-		.then(() => res.status(201).json({ message: "Objet enregistré !" }))
-		.catch((error) => res.status(400).json({ error }));
+	res.status(200).json(message);
+	console.log(req.body);
 };
 
+exports.getOneMessage = async (req, res, next) => {};
 // exports.likeMessage = (req, res, next) => {
 // 	Sauce.findOne({
 // 		_id: req.params.id
@@ -50,59 +51,60 @@ exports.createMessage = (req, res, next) => {
 // 		sauce.save();
 // 	});
 // };
-exports.getOneMessage = (req, res, next) => {
-	Message.findOne({
-		_id: req.params.id
-	})
-		.then((message) => {
-			res.status(200).json(message);
-		})
-		.catch((error) => {
-			res.status(404).json({
-				error: error
-			});
-		});
-};
 
-exports.modifyMessage = (req, res, next) => {
-	if (req.file) {
-		Message.findOne({ _id: req.params.id }).then((message) => {
-			const filename = message.imageUrl.split("/images/")[1];
-			fs.unlink(`images/${filename}`, () => {});
-		});
-	}
-	const messageObject = req.file
-		? {
-				...JSON.parse(req.body.sauce),
-				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-		  }
-		: { ...req.body };
-	Sauce.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
-		.then(() => res.status(200).json({ message: "Objet modifié !" }))
-		.catch((error) => res.status(400).json({ error }));
-};
+// exports.getOneMessage = (req, res, next) => {
+// 	Message.findOne({
+// 		_id: req.params.id
+// 	})
+// 		.then((message) => {
+// 			res.status(200).json(message);
+// 		})
+// 		.catch((error) => {
+// 			res.status(404).json({
+// 				error: error
+// 			});
+// 		});
+// };
 
-exports.deleteMessage = (req, res, next) => {
-	Message.findOne({ _id: req.params.id })
-		.then((message) => {
-			const filename = message.imageUrl.split("/images/")[1];
-			fs.unlink(`images/${filename}`, () => {
-				Message.deleteOne({ _id: req.params.id })
-					.then(() => res.status(200).json({ message: "Objet supprimé !" }))
-					.catch((error) => res.status(400).json({ error }));
-			});
-		})
-		.catch((error) => res.status(500).json({ error }));
-};
+// exports.modifyMessage = (req, res, next) => {
+// 	if (req.file) {
+// 		Message.findOne({ _id: req.params.id }).then((message) => {
+// 			const filename = message.imageUrl.split("/images/")[1];
+// 			fs.unlink(`images/${filename}`, () => {});
+// 		});
+// 	}
+// 	const messageObject = req.file
+// 		? {
+// 				...JSON.parse(req.body.sauce),
+// 				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+// 		  }
+// 		: { ...req.body };
+// 	Sauce.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
+// 		.then(() => res.status(200).json({ message: "Objet modifié !" }))
+// 		.catch((error) => res.status(400).json({ error }));
+// };
 
-exports.getAllMessage = (req, res, next) => {
-	Sauce.find()
-		.then((messages) => {
-			res.status(200).json(messages);
-		})
-		.catch((error) => {
-			res.status(400).json({
-				error: error
-			});
-		});
-};
+// exports.deleteMessage = (req, res, next) => {
+// 	Message.findOne({ _id: req.params.id })
+// 		.then((message) => {
+// 			const filename = message.imageUrl.split("/images/")[1];
+// 			fs.unlink(`images/${filename}`, () => {
+// 				Message.deleteOne({ _id: req.params.id })
+// 					.then(() => res.status(200).json({ message: "Objet supprimé !" }))
+// 					.catch((error) => res.status(400).json({ error }));
+// 			});
+// 		})
+// 		.catch((error) => res.status(500).json({ error }));
+// };
+
+// exports.getAllMessage = (req, res, next) => {
+// 	Sauce.find()
+// 		.then((messages) => {
+// 			res.status(200).json(messages);
+// 		})
+// 		.catch((error) => {
+// 			res.status(400).json({
+// 				error: error
+// 			});
+// 		});
+// };

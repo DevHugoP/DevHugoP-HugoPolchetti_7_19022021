@@ -7,19 +7,16 @@ module.exports = (sequelize, DataTypes) => {
 		 * This method is not a part of Sequelize lifecycle.
 		 * The `models/index` file will call this method automatically.
 		 */
-		static associate(models) {
-			models.Message.belongsTo(models.User, {
-				foreignKey: {
-					allowNull: false
-				}
-			});
-		}
+		static associate(models) {}
 	}
 	Message.init(
 		{
-			idMESSAGES: DataTypes.INTEGER,
+			uuid: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4
+			},
 			title: DataTypes.STRING,
-			content: DataTypes.STRING,
+			content: DataTypes.TEXT,
 			attachement: DataTypes.STRING,
 			likes: DataTypes.INTEGER
 		},

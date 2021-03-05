@@ -1,6 +1,9 @@
 "use strict";
+
+const { sequelize } = require("../models");
+
 module.exports = {
-	up: async (queryInterface, Sequelize) => {
+	up: async (queryInterface, Sequelize, DataTypes) => {
 		await queryInterface.createTable("Messages", {
 			id: {
 				allowNull: false,
@@ -8,17 +11,11 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
-			idMESSAGES: {
+			uuid: {
 				allowNull: false,
-				type: Sequelize.INTEGER
-			},
-			idUSERS: {
-				allowNull: false,
-				type: Sequelize.INTEGER,
-				references: {
-					model: "Users",
-					key: "id"
-				}
+				type: Sequelize.UUID,
+				defaultValue: Sequelize.UUIDV4,
+				unique: true
 			},
 			title: {
 				allowNull: false,
