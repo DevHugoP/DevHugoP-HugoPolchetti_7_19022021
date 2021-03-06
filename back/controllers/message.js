@@ -14,7 +14,93 @@ exports.createMessage = async (req, res, next) => {
 	console.log(req.body);
 };
 
-exports.getOneMessage = async (req, res, next) => {};
+exports.getAllMessage = (req, res, next) => {
+	db.Message.findAll()
+		.then((messages) => {
+			res.status(200).json(messages);
+		})
+		.catch((error) => {
+			res.status(400).json({
+				error: error
+			});
+		});
+};
+
+exports.getOneMessage = (req, res, next) => {
+	console.log(req.params);
+	// req.params contient ce qu'il y a dans l'uri => faire une requette
+	console.log(req.params.id);
+	db.Message.findOne({
+		where: {
+			uuid: req.params.id
+		}
+	})
+		.then((message) => {
+			res.status(200).json(message);
+		})
+		.catch((error) => {
+			res.status(404).json({
+				error: error
+			});
+		});
+};
+
+exports.deleteMessage = (req, res, next) => {
+	db.Message.findOne({
+		where: {
+			uuid: req.params.id
+		}
+	})
+		.then((message) => {
+			const filename = message.attachement.split("/images/")[1];
+			fs.unlink(`images/${filename}`, () => {
+				db.Message.destroy({
+					where: {
+						uuid: req.params.id
+					}
+				})
+					.then(() => res.status(200).json({ message: "Message supprimé !" }))
+					.catch((error) => res.status(400).json({ error }));
+			});
+		})
+		.catch((error) => res.status(500).json({ error }));
+};
+
+exports.modifyMessage = (req, res, next) => {
+	console.log(req.body.message);
+	if (req.file) {
+		db.Message.findOne({
+			where: {
+				uuid: req.params.id
+			}
+		}).then((message) => {
+			const filename = message.attachement.split("/images/")[1];
+			fs.unlink(`images/${filename}`, () => {});
+		});
+	}
+	const messageObject = req.file
+		? {
+				...JSON.parse(req.body.message),
+				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+		  }
+		: { ...req.body };
+	db.Message.update(
+		{
+			...messageObject,
+			where: {
+				uuid: req.params.id
+			}
+		},
+		{
+			where: {
+				uuid: req.params.id
+			}
+		}
+	)
+		.then(() => res.status(200).json({ message: "Message modifié !" }))
+		.catch((error) => res.status(400).json({ error }));
+};
+
 // exports.likeMessage = (req, res, next) => {
 // 	Sauce.findOne({
 // 		_id: req.params.id
@@ -50,61 +136,4 @@ exports.getOneMessage = async (req, res, next) => {};
 
 // 		sauce.save();
 // 	});
-// };
-
-// exports.getOneMessage = (req, res, next) => {
-// 	Message.findOne({
-// 		_id: req.params.id
-// 	})
-// 		.then((message) => {
-// 			res.status(200).json(message);
-// 		})
-// 		.catch((error) => {
-// 			res.status(404).json({
-// 				error: error
-// 			});
-// 		});
-// };
-
-// exports.modifyMessage = (req, res, next) => {
-// 	if (req.file) {
-// 		Message.findOne({ _id: req.params.id }).then((message) => {
-// 			const filename = message.imageUrl.split("/images/")[1];
-// 			fs.unlink(`images/${filename}`, () => {});
-// 		});
-// 	}
-// 	const messageObject = req.file
-// 		? {
-// 				...JSON.parse(req.body.sauce),
-// 				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-// 		  }
-// 		: { ...req.body };
-// 	Sauce.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
-// 		.then(() => res.status(200).json({ message: "Objet modifié !" }))
-// 		.catch((error) => res.status(400).json({ error }));
-// };
-
-// exports.deleteMessage = (req, res, next) => {
-// 	Message.findOne({ _id: req.params.id })
-// 		.then((message) => {
-// 			const filename = message.imageUrl.split("/images/")[1];
-// 			fs.unlink(`images/${filename}`, () => {
-// 				Message.deleteOne({ _id: req.params.id })
-// 					.then(() => res.status(200).json({ message: "Objet supprimé !" }))
-// 					.catch((error) => res.status(400).json({ error }));
-// 			});
-// 		})
-// 		.catch((error) => res.status(500).json({ error }));
-// };
-
-// exports.getAllMessage = (req, res, next) => {
-// 	Sauce.find()
-// 		.then((messages) => {
-// 			res.status(200).json(messages);
-// 		})
-// 		.catch((error) => {
-// 			res.status(400).json({
-// 				error: error
-// 			});
-// 		});
 // };
