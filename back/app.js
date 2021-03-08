@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const messageRoutes = require("./routes/message");
 const userRoutes = require("./routes/user");
+const commentRoutes = require("./routes/comment");
 const { Sequelize } = require("sequelize");
 
 // Connexion DB
@@ -20,6 +21,12 @@ const app = express();
 app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use(bodyParser.json());
+app.use(
+	bodyParser.urlencoded({
+		extended: true
+	})
+);
 
 // CORS
 app.use((req, res, next) => {
@@ -32,15 +39,8 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get("/", (req, res) => res.send("TEST"));
 app.use("/api/messages", messageRoutes);
 app.use("/api/auth", userRoutes);
-
-app.use(bodyParser.json());
-app.use(
-	bodyParser.urlencoded({
-		extended: true
-	})
-);
+app.use("/api/comments", commentRoutes);
 
 module.exports = app;

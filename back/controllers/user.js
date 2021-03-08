@@ -1,15 +1,17 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const db = require("../models");
 exports.signup = (req, res, next) => {
 	bcrypt
 		.hash(req.body.password, 10)
 		.then((hash) => {
-			const user = new User({
+			const user = db.User.create({
+				username: req.body.username,
+				password: hash,
 				email: req.body.email,
-				password: hash
-			});
-			user.save()
+				isAdmin: req.body.isAdmin
+			})
 				.then(() => res.status(201).json({ message: "Utilisateur créé !" }))
 				.catch((error) => res.status(400).json({ error }));
 		})
@@ -17,7 +19,11 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-	User.findOne({ email: req.body.email })
+	db.User.findOne({
+		where: {
+			email: req.body.email
+		}
+	})
 		.then((user) => {
 			if (!user) {
 				return res.status(401).json({ error: "Utilisateur non trouvé !" });
@@ -29,8 +35,8 @@ exports.login = (req, res, next) => {
 						return res.status(401).json({ error: "Mot de passe incorrect !" });
 					}
 					res.status(200).json({
-						userId: user._id,
-						token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
+						userId: user.uuid,
+						token: jwt.sign({ where: { userId: user.uuid } }, "RANDOM_TOKEN_SECRET", {
 							expiresIn: "24h"
 						})
 					});
@@ -41,7 +47,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.test = (req, res, next) => {
-	User.findOne({ email: req.body.email })
+	db.User.findOne({ where: { email: req.body.email } })
 		.then((user) => {
 			return (
 				res.status(401).json({ message: `le test fonctionne " + ${user}` }),

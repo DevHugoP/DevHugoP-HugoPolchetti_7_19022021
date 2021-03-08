@@ -10,7 +10,7 @@ const Login = () => {
 					<div className="blockLogo">
 						<div>
 							<img
-								src="images/icon-left-font-monochrome-black.png"
+								src="images/resize.png"
 								alt="logo de Groupomania"
 								className="logoPageAcceuil"
 							/>
