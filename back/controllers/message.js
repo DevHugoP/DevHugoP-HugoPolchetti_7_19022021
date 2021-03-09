@@ -67,7 +67,6 @@ exports.deleteMessage = (req, res, next) => {
 };
 
 exports.modifyMessage = (req, res, next) => {
-	console.log(req.body.message);
 	if (req.file) {
 		db.Message.findOne({
 			where: {
@@ -78,6 +77,7 @@ exports.modifyMessage = (req, res, next) => {
 			fs.unlink(`images/${filename}`, () => {});
 		});
 	}
+
 	const messageObject = req.file
 		? {
 				...JSON.parse(req.body.message),
@@ -100,7 +100,6 @@ exports.modifyMessage = (req, res, next) => {
 		.then(() => res.status(200).json({ message: "Message modifié !" }))
 		.catch((error) => res.status(400).json({ error }));
 };
-
 // exports.likeMessage = (req, res, next) => {
 // 	Sauce.findOne({
 // 		_id: req.params.id

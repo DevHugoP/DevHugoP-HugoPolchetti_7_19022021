@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+var bodyParser = require("body-parser");
 const path = require("path");
 const messageRoutes = require("./routes/message");
 const userRoutes = require("./routes/user");
@@ -17,16 +17,9 @@ sequelize
 	.catch((err) => console.log("Error: " + err));
 
 const app = express();
-
-app.use(express.json());
+// parse application/json
 
 app.use("/images", express.static(path.join(__dirname, "images")));
-app.use(bodyParser.json());
-app.use(
-	bodyParser.urlencoded({
-		extended: true
-	})
-);
 
 // CORS
 app.use((req, res, next) => {
@@ -38,6 +31,7 @@ app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
 	next();
 });
+app.use(express.json());
 
 app.use("/api/messages", messageRoutes);
 app.use("/api/auth", userRoutes);

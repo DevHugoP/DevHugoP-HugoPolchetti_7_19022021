@@ -66,7 +66,6 @@ exports.deleteComment = (req, res, next) => {
 };
 
 exports.modifyComment = (req, res, next) => {
-	console.log(req.body.comment);
 	if (req.file) {
 		db.Comment.findOne({
 			where: {
@@ -77,6 +76,7 @@ exports.modifyComment = (req, res, next) => {
 			fs.unlink(`images/${filename}`, () => {});
 		});
 	}
+
 	const commentObject = req.file
 		? {
 				...JSON.parse(req.body.comment),
