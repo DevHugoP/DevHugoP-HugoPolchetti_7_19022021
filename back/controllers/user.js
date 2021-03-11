@@ -45,14 +45,3 @@ exports.login = (req, res, next) => {
 		})
 		.catch((error) => res.status(500).json({ error }));
 };
-
-exports.test = (req, res, next) => {
-	db.User.findOne({ where: { email: req.body.email } })
-		.then((user) => {
-			return (
-				res.status(401).json({ message: `le test fonctionne " + ${user}` }),
-				console.log(user)
-			);
-		})
-		.catch((error) => res.status(500).json({ error }));
-};
