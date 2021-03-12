@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Comment.init(
 		{
-			uuid: {
-				type: DataTypes.UUID,
-				defaultValue: DataTypes.UUIDV4
-			},
 			content: DataTypes.TEXT,
 			likes: DataTypes.INTEGER
 		},

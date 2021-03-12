@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Signup.css";
 
 const Signup = () => {
@@ -8,7 +9,7 @@ const Signup = () => {
 				<div className="blockForm">
 					<form className="formLogin">
 						<div>
-							<input type="username" name="username" placeholder="SupermanxXx59000" />
+							<input type="username" name="username" placeholder="Pseudo" />
 						</div>
 						<div>
 							<input type="email" name="email" placeholder="Adresse e-mail" />
@@ -20,6 +21,10 @@ const Signup = () => {
 						<button className="loginBtn" type="submit">
 							Créer le compte
 						</button>
+						<div className="sepLine"></div>
+						<Link to="/login" className="signupBtn">
+							Déjà inscrit
+						</Link>
 					</form>
 				</div>
 			</div>

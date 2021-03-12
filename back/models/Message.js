@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Message.init(
 		{
-			uuid: {
-				type: DataTypes.UUID,
-				defaultValue: DataTypes.UUIDV4
-			},
 			title: DataTypes.STRING,
 			content: DataTypes.TEXT,
 			attachement: DataTypes.STRING,

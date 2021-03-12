@@ -8,18 +8,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const ReactRouterSetup = () => {
 	return (
 		<Router>
-			<Route path="/">
-				<Main />
-			</Route>
 			<Route path="/login">
+				<Main />
 				<Login />
 			</Route>
 			{/* <Route path="/test">
 				<Test />
-			</Route>
-			<Route path="/signup">
-				<Signup />
 			</Route> */}
+			<Route path="/signup">
+				<Main />
+				<Signup />
+			</Route>
 		</Router>
 	);
 };

@@ -35,8 +35,8 @@ exports.login = (req, res, next) => {
 						return res.status(401).json({ error: "Mot de passe incorrect !" });
 					}
 					res.status(200).json({
-						userId: user.uuid,
-						token: jwt.sign({ where: { userId: user.uuid } }, "RANDOM_TOKEN_SECRET", {
+						userId: user.id,
+						token: jwt.sign({ where: { userId: user.id } }, "RANDOM_TOKEN_SECRET", {
 							expiresIn: "24h"
 						})
 					});

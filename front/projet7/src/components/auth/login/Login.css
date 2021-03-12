@@ -2,16 +2,17 @@
 	margin-left: 40rem;
 }
 .blockForm {
-	position: relative;
+	position: absolute;
+	left: 60%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: white;
 	border-radius: 8px;
 	box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-	height: 300px;
-	width: 380px;
-	padding: 0.95rem 0;
+	height: 280px;
+	width: 320px;
+	padding: 1.7rem 0;
 	margin: auto;
 }
 
@@ -48,19 +49,19 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	gap: 1.2rem;
+	gap: 1rem;
 }
 
 input {
 	height: 40px;
-	width: 340px;
+	width: 270px;
 	border: 1px solid #bbb;
 	border-radius: 0.34rem;
 }
 
 .loginBtn {
-	height: 50px;
-	width: 340px;
+	height: 45px;
+	width: 270px;
 	border: 1px solid #bbb;
 	background-color: #1877f2;
 	color: white;
@@ -81,6 +82,10 @@ input {
 	text-decoration: underline;
 }
 .signupBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
 	height: 50px;
 	width: 160px;
 	color: white;
@@ -94,7 +99,7 @@ input {
 }
 
 .sepLine {
-	width: 340px;
+	width: 280px;
 	height: 1px;
 	background-color: rgb(212, 211, 211);
 }
