@@ -19,6 +19,13 @@ const ReactRouterSetup = () => {
 				<Main />
 				<Signup />
 			</Route>
+			<Route path="/signup">
+				<Main />
+				<Signup />
+			</Route>
+			<Route path="/test">
+				<Test />
+			</Route>
 		</Router>
 	);
 };

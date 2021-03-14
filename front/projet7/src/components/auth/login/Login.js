@@ -1,13 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.css";
+import Signup from "../signup/Signup";
 
-const Login = () => {
+const Login = (props) => {
+	console.log(props.location);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [people, setPeople] = useState([]);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (email && password) {
@@ -15,9 +18,7 @@ const Login = () => {
 			setPeople((people) => {
 				return [...people, user];
 			});
-			// axios.get("http://localhost:5000/api/messages").then((res) => {
-			// 	console.log(res);
-			// });
+
 			axios
 				.post("http://localhost:5000/api/auth/login", { email, password })
 				.then(function (res) {
@@ -57,7 +58,6 @@ const Login = () => {
 						<button className="loginBtn" type="submit">
 							Connexion
 						</button>
-
 						<div className="sepLine"></div>
 						<Link to="/signup" className="signupBtn">
 							Créer un compte
