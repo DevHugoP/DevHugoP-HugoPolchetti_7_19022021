@@ -3,10 +3,9 @@ import { Link, Redirect, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.css";
-import Signup from "../signup/Signup";
+import history from "../../../history";
 
-const Login = (props) => {
-	console.log(props.location);
+const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [people, setPeople] = useState([]);
@@ -24,6 +23,7 @@ const Login = (props) => {
 				.then(function (res) {
 					console.log(res);
 					console.log("you are connected");
+					history.push("/signup");
 				});
 			setEmail("");
 			setPassword("");
