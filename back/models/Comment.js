@@ -5,14 +5,14 @@ module.exports = (sequelize, DataTypes) => {
 	class Comment extends Model {
 		static associate(models) {
 			models.Comment.belongsTo(models.User, {
-				foreignKey: {}
+				foreignKey: "userId"
 			});
 		}
 	}
 	Comment.init(
 		{
 			content: DataTypes.TEXT,
-			user_id: {
+			userId: {
 				type: DataTypes.INTEGER
 			}
 		},

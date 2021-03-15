@@ -1,29 +1,32 @@
 const fs = require("fs");
 const Message = require("../models/Message");
+const User = require("../models/User");
 const db = require("../models");
 
-exports.createMessage = async (req, res, next) => {
-	const messageObject = req.body;
-	const message = await db.Message.create({
-		title: messageObject.title,
-		content: messageObject.content,
-		attachement: messageObject.attachement,
-		likes: messageObject.likes
-	});
-	res.status(200).json(message);
-	console.log(req.body);
-};
-
 exports.getAllMessage = (req, res, next) => {
-	db.Message.findAll()
+	db.Message.findAll({
+		include: [{ model: db.User }]
+	})
 		.then((messages) => {
-			res.status(200).json(messages);
+			res.status(200).json({ messages });
 		})
 		.catch((error) => {
 			res.status(400).json({
 				error: error
 			});
 		});
+};
+
+exports.createMessage = async (req, res, next) => {
+	const messageObject = req.body;
+	const message = await db.Message.create({
+		userId: messageObject.userId,
+		title: messageObject.title,
+		content: messageObject.content,
+		attachement: messageObject.attachement
+	});
+	res.status(200).json(message);
+	console.log(req.body);
 };
 
 exports.getOneMessage = (req, res, next) => {
@@ -33,7 +36,8 @@ exports.getOneMessage = (req, res, next) => {
 	db.Message.findOne({
 		where: {
 			id: req.params.id
-		}
+		},
+		include: [{ model: db.User }]
 	})
 		.then((message) => {
 			res.status(200).json(message);

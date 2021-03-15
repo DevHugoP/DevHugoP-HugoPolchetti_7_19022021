@@ -3,10 +3,10 @@ const Comment = require("../models/Comment");
 const db = require("../models");
 
 exports.createComment = async (req, res, next) => {
-	console.log(req.body.user_id);
+	console.log(req.body.userId);
 	const commentObject = req.body;
 	const comment = await db.Comment.create({
-		user_id: commentObject.user_id,
+		userId: commentObject.userId,
 		content: commentObject.content
 	});
 	res.status(200).json(comment);
@@ -14,7 +14,9 @@ exports.createComment = async (req, res, next) => {
 };
 
 exports.getAllComment = (req, res, next) => {
-	db.Comment.findAll()
+	db.Comment.findAll({
+		include: [{ model: db.User }]
+	})
 		.then((comments) => {
 			res.status(200).json(comments);
 		})
@@ -32,7 +34,8 @@ exports.getOneComment = (req, res, next) => {
 	db.Comment.findOne({
 		where: {
 			id: req.params.id
-		}
+		},
+		include: [{ model: db.User }]
 	})
 		.then((comment) => {
 			res.status(200).json(comment);
