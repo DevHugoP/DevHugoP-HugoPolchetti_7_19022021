@@ -32,7 +32,7 @@ exports.getOneMessage = (req, res, next) => {
 	console.log(req.params.id);
 	db.Message.findOne({
 		where: {
-			uuid: req.params.id
+			id: req.params.id
 		}
 	})
 		.then((message) => {
@@ -48,7 +48,7 @@ exports.getOneMessage = (req, res, next) => {
 exports.deleteMessage = (req, res, next) => {
 	db.Message.findOne({
 		where: {
-			uuid: req.params.id
+			id: req.params.id
 		}
 	})
 		.then((message) => {
@@ -56,7 +56,7 @@ exports.deleteMessage = (req, res, next) => {
 			fs.unlink(`images/${filename}`, () => {
 				db.Message.destroy({
 					where: {
-						uuid: req.params.id
+						id: req.params.id
 					}
 				})
 					.then(() => res.status(200).json({ message: "Message supprimé !" }))
@@ -70,7 +70,7 @@ exports.modifyMessage = (req, res, next) => {
 	if (req.file) {
 		db.Message.findOne({
 			where: {
-				uuid: req.params.id
+				id: req.params.id
 			}
 		}).then((message) => {
 			const filename = message.attachement.split("/images/")[1];
@@ -88,12 +88,12 @@ exports.modifyMessage = (req, res, next) => {
 		{
 			...messageObject,
 			where: {
-				uuid: req.params.id
+				id: req.params.id
 			}
 		},
 		{
 			where: {
-				uuid: req.params.id
+				id: req.params.id
 			}
 		}
 	)

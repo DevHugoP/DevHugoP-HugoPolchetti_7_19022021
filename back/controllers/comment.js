@@ -3,10 +3,11 @@ const Comment = require("../models/Comment");
 const db = require("../models");
 
 exports.createComment = async (req, res, next) => {
+	console.log(req.body.user_id);
 	const commentObject = req.body;
 	const comment = await db.Comment.create({
-		content: commentObject.content,
-		likes: commentObject.likes
+		user_id: commentObject.user_id,
+		content: commentObject.content
 	});
 	res.status(200).json(comment);
 	console.log(req.body);
@@ -30,7 +31,7 @@ exports.getOneComment = (req, res, next) => {
 	console.log(req.params.id);
 	db.Comment.findOne({
 		where: {
-			uuid: req.params.id
+			id: req.params.id
 		}
 	})
 		.then((comment) => {
@@ -46,7 +47,7 @@ exports.getOneComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
 	db.Comment.findOne({
 		where: {
-			uuid: req.params.id
+			id: req.params.id
 		}
 	})
 		.then((comment) => {
@@ -55,7 +56,7 @@ exports.deleteComment = (req, res, next) => {
 			// () => {
 			db.Comment.destroy({
 				where: {
-					uuid: req.params.id
+					id: req.params.id
 				}
 			})
 				.then(() => res.status(200).json({ comment: "Comment supprimé !" }))
@@ -69,7 +70,7 @@ exports.modifyComment = (req, res, next) => {
 	if (req.file) {
 		db.Comment.findOne({
 			where: {
-				uuid: req.params.id
+				id: req.params.id
 			}
 		}).then((comment) => {
 			const filename = comment.attachement.split("/images/")[1];
@@ -87,12 +88,12 @@ exports.modifyComment = (req, res, next) => {
 		{
 			...commentObject,
 			where: {
-				uuid: req.params.id
+				id: req.params.id
 			}
 		},
 		{
 			where: {
-				uuid: req.params.id
+				id: req.params.id
 			}
 		}
 	)
