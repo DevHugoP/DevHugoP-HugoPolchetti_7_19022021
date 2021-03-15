@@ -8,22 +8,16 @@ import history from "../../../history";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [people, setPeople] = useState([]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (email && password) {
-			const user = { email, password };
-			setPeople((people) => {
-				return [...people, user];
-			});
-
 			axios
 				.post("http://localhost:5000/api/auth/login", { email, password })
 				.then(function (res) {
 					console.log(res);
 					console.log("you are connected");
-					history.push("/signup");
+					history.push("/home");
 				});
 			setEmail("");
 			setPassword("");

@@ -2,6 +2,7 @@ import Login from "./components/auth/login/Login";
 import Test from "./components/auth/login/Test";
 import Signup from "./components/auth/signup/Signup";
 import Main from "./components/mainPage/Main";
+import Home from "./components/homepage/homepage";
 import React from "react";
 import { Router, Route } from "react-router-dom";
 import history from "./history";
@@ -26,6 +27,9 @@ const ReactRouterSetup = () => {
 			</Route>
 			<Route path="/test">
 				<Test />
+			</Route>
+			<Route path="/home">
+				<Home />
 			</Route>
 		</Router>
 	);
