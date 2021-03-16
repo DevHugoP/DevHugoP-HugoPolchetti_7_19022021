@@ -12,7 +12,7 @@ const Home = () => {
 		axios.get("http://localhost:5000/api/messages").then(function (res) {
 			const messages = res.data;
 			console.log(res.data);
-			setMessages(messages);
+			setMessages(messages.messages);
 		});
 	};
 	useEffect(() => {
@@ -22,16 +22,27 @@ const Home = () => {
 	return (
 		<>
 			<h1> RECENT POST </h1>
+
 			<ul>
 				{messages.map((message) => {
-					const { id, title, content, createdAt, likes, attachement } = message;
 					return (
-						<li key={id}>
-							<h3> {title}</h3>
-							<h4>{content}</h4>
-							<h5>Created : {moment(createdAt).fromNow()}</h5>
-							<h6>like : {likes}</h6>
-							<h6>{attachement}</h6>
+						<li key={message.id}>
+							{/* <h3>{console.log(message.User)}</h3> */}
+							<h3> {message.title}</h3>
+							<h4>{message.content}</h4>
+							<h5>Created : {moment(message.createdAt).fromNow()}</h5>
+							<h6>{message.attachement}</h6>
+
+							<ul>
+								{[message.User].map((user) => {
+									return (
+										<li>
+											<h4 key={user.id}>{user.username}</h4>
+											<h4>{user.password}</h4>
+										</li>
+									);
+								})}
+							</ul>
 							<Link to="/comments/=?messagesID">Commenter</Link>
 							<button>suprimer</button>
 							<button>modifier</button>

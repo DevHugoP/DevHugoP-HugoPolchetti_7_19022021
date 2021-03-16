@@ -53,7 +53,8 @@ exports.deleteMessage = (req, res, next) => {
 	db.Message.findOne({
 		where: {
 			id: req.params.id
-		}
+		},
+		include: [{ model: db.User }]
 	})
 		.then((message) => {
 			const filename = message.attachement.split("/images/")[1];
@@ -75,7 +76,8 @@ exports.modifyMessage = (req, res, next) => {
 		db.Message.findOne({
 			where: {
 				id: req.params.id
-			}
+			},
+			include: [{ model: db.User }]
 		}).then((message) => {
 			const filename = message.attachement.split("/images/")[1];
 			fs.unlink(`images/${filename}`, () => {});

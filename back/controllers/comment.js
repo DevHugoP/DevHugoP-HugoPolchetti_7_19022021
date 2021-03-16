@@ -51,7 +51,8 @@ exports.deleteComment = (req, res, next) => {
 	db.Comment.findOne({
 		where: {
 			id: req.params.id
-		}
+		},
+		include: [{ model: db.User }]
 	})
 		.then((comment) => {
 			// const filename = comment.attachement.split("/images/")[1];
@@ -74,7 +75,8 @@ exports.modifyComment = (req, res, next) => {
 		db.Comment.findOne({
 			where: {
 				id: req.params.id
-			}
+			},
+			include: [{ model: db.User }]
 		}).then((comment) => {
 			const filename = comment.attachement.split("/images/")[1];
 			fs.unlink(`images/${filename}`, () => {});
