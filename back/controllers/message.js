@@ -5,7 +5,7 @@ const db = require("../models");
 
 exports.getAllMessage = (req, res, next) => {
 	db.Message.findAll({
-		include: [{ model: db.User }]
+		include: [{ model: db.User }, { model: db.Comment }]
 	})
 		.then((messages) => {
 			res.status(200).json({ messages });
@@ -37,7 +37,7 @@ exports.getOneMessage = (req, res, next) => {
 		where: {
 			id: req.params.id
 		},
-		include: [{ model: db.User }]
+		include: [{ model: db.User }, { model: db.Comment }]
 	})
 		.then((message) => {
 			res.status(200).json(message);
@@ -53,8 +53,7 @@ exports.deleteMessage = (req, res, next) => {
 	db.Message.findOne({
 		where: {
 			id: req.params.id
-		},
-		include: [{ model: db.User }]
+		}
 	})
 		.then((message) => {
 			const filename = message.attachement.split("/images/")[1];
@@ -76,8 +75,7 @@ exports.modifyMessage = (req, res, next) => {
 		db.Message.findOne({
 			where: {
 				id: req.params.id
-			},
-			include: [{ model: db.User }]
+			}
 		}).then((message) => {
 			const filename = message.attachement.split("/images/")[1];
 			fs.unlink(`images/${filename}`, () => {});

@@ -19,6 +19,10 @@ module.exports = {
 					key: "id"
 				}
 			},
+			commentId: {
+				allowNull: true,
+				type: Sequelize.INTEGER
+			}, // rajouter la foreign key après la creation de la table
 
 			title: {
 				allowNull: false,

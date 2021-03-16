@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 			models.Message.belongsTo(models.User, {
 				foreignKey: "userId"
 			});
+			models.Message.hasMany(models.Comment);
 		}
 	}
 	Message.init(
@@ -14,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
 			title: DataTypes.STRING,
 			content: DataTypes.TEXT,
 			attachement: DataTypes.STRING,
-			userId: DataTypes.INTEGER
+			userId: DataTypes.INTEGER,
+			commentId: DataTypes.INTEGER
 		},
 		{
 			sequelize,

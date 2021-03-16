@@ -16,6 +16,15 @@ module.exports = {
 					key: "id"
 				}
 			},
+			messageId: {
+				allowNull: true,
+				type: Sequelize.INTEGER,
+				references: {
+					model: "Messages",
+					key: "id"
+				}
+			},
+
 			content: {
 				allowNull: false,
 				type: Sequelize.STRING

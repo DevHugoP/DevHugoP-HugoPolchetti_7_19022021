@@ -7,6 +7,7 @@ exports.createComment = async (req, res, next) => {
 	const commentObject = req.body;
 	const comment = await db.Comment.create({
 		userId: commentObject.userId,
+		messageId: commentObject.messageId,
 		content: commentObject.content
 	});
 	res.status(200).json(comment);
@@ -15,7 +16,7 @@ exports.createComment = async (req, res, next) => {
 
 exports.getAllComment = (req, res, next) => {
 	db.Comment.findAll({
-		include: [{ model: db.User }]
+		include: [{ model: db.User }, { model: db.Message }]
 	})
 		.then((comments) => {
 			res.status(200).json(comments);
@@ -35,7 +36,7 @@ exports.getOneComment = (req, res, next) => {
 		where: {
 			id: req.params.id
 		},
-		include: [{ model: db.User }]
+		include: [{ model: db.User }, { model: db.Message }]
 	})
 		.then((comment) => {
 			res.status(200).json(comment);
@@ -51,8 +52,7 @@ exports.deleteComment = (req, res, next) => {
 	db.Comment.findOne({
 		where: {
 			id: req.params.id
-		},
-		include: [{ model: db.User }]
+		}
 	})
 		.then((comment) => {
 			// const filename = comment.attachement.split("/images/")[1];
@@ -75,8 +75,7 @@ exports.modifyComment = (req, res, next) => {
 		db.Comment.findOne({
 			where: {
 				id: req.params.id
-			},
-			include: [{ model: db.User }]
+			}
 		}).then((comment) => {
 			const filename = comment.attachement.split("/images/")[1];
 			fs.unlink(`images/${filename}`, () => {});

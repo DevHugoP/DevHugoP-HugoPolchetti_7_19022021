@@ -7,12 +7,18 @@ module.exports = (sequelize, DataTypes) => {
 			models.Comment.belongsTo(models.User, {
 				foreignKey: "userId"
 			});
+			models.Comment.belongsTo(models.Message, {
+				foreignKey: "messageId"
+			});
 		}
 	}
 	Comment.init(
 		{
 			content: DataTypes.TEXT,
 			userId: {
+				type: DataTypes.INTEGER
+			},
+			messageId: {
 				type: DataTypes.INTEGER
 			}
 		},
