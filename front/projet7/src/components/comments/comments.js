@@ -9,4 +9,4 @@ const Comments = () => {
 	return <></>;
 };
 
-export default Home;
+export default Comments;

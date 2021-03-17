@@ -1,8 +1,25 @@
+.hp_container1 {
+	display: flex;
+	flex-direction: column;
+}
+.backgroundPic2 {
+	background: url("../../images/mac.jpg") no-repeat center center fixed;
+	background-size: cover;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	/* Preserve aspet ratio */
+}
 .hp_mainTitle {
+	font-family: "Roboto", "Sans serif";
+	font-weight: 500;
+	font-size: 2.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 2rem;
+	color: #f1e9e9;
 }
 .homepage_container {
 	display: flex;
@@ -10,19 +27,26 @@
 	gap: 3rem;
 	justify-content: center;
 	align-items: center;
+	padding: 2rem;
 }
 
 .hp_messagesBox {
 	width: 450px;
-	height: 200px;
+	height: 220px;
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	border: 1px solid black;
+	background-color: #f1e9e9;
+	box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.52);
+	-webkit-box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.52);
+	-moz-box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.52);
+	overflow: hidden;
+	border-radius: 0.4rem;
 }
 .hp_modifiers {
 	display: flex;
+	align-items: center;
 	justify-content: space-around;
-	padding-top: 50px;
+	padding-top: 45px;
 }
