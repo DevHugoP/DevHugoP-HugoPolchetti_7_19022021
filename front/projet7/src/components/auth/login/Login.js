@@ -15,12 +15,10 @@ const Login = () => {
 			axios
 				.post("http://localhost:5000/api/auth/login", { email, password })
 				.then(function (res) {
-					console.log(res);
+					localStorage.setItem("Token", `Bearer ${res.data.token}`);
 					console.log("you are connected");
 					history.push("/home");
 				});
-			setEmail("");
-			setPassword("");
 		} else {
 			console.log("il manque des informations");
 		}

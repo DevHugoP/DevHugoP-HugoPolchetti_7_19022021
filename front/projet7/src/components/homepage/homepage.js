@@ -25,6 +25,7 @@ const Home = () => {
 			<div className="hp_container1">
 				<div className="backgroundPic2">
 					<h1 className="hp_mainTitle"> Messages Recents </h1>
+					<Link to="/login">TEST</Link>
 					<div className="homepage_container">
 						{messages.map((message) => {
 							return (

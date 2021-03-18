@@ -9,10 +9,11 @@ const Signup = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (email && password && username) {
+		if (email && password === confirmPassword && username) {
 			axios
 				.post("http://localhost:5000/api/auth/signup", {
 					username,
@@ -23,21 +24,22 @@ const Signup = () => {
 				.then(function (res) {
 					console.log(res);
 					console.log(`bienvenue ${username}`);
+					console.log(res.data.token);
+					localStorage.setItem("Token", `Bearer ${res.data.token}`);
 					history.push("/home");
 				});
-			setEmail("");
-			setPassword("");
-			setUsername("");
+		} else if (password !== confirmPassword && password !== "" && confirmPassword !== "") {
+			console.log("les mots de passe ne sont pas identiques ");
 		} else {
-			console.log("il manque des informations");
+			console.log("il manque des informations ");
 		}
 	};
 
 	return (
 		<>
 			<div>
-				<div className="blockForm">
-					<form className="formLogin" onSubmit={handleSubmit}>
+				<div className="blockForm2">
+					<form className="formLogin2" onSubmit={handleSubmit}>
 						<div>
 							<input
 								type="username"
@@ -63,6 +65,15 @@ const Signup = () => {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder="Mot de passe"
+							/>
+						</div>
+						<div>
+							<input
+								type="confirmPassword"
+								name="confirmPassword"
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+								placeholder=" Confirmer Mot de passe"
 							/>
 						</div>
 

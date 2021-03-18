@@ -12,7 +12,14 @@ exports.signup = (req, res, next) => {
 				email: req.body.email,
 				isAdmin: req.body.isAdmin
 			})
-				.then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+				.then(() =>
+					res.status(201).json({
+						message: "Utilisateur créé !",
+						token: jwt.sign({ where: { userId: user.id } }, "RANDOM_TOKEN_SECRET", {
+							expiresIn: "24h"
+						})
+					})
+				)
 				.catch((error) => res.status(400).json({ error }));
 		})
 		.catch((error) => res.status(500).json({ error }));
