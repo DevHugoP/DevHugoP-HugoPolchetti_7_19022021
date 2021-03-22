@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Signup.css";
 import axios from "axios";
 import history from "../../../history";
-
+import Main from "../../mainPage/Main";
 const Signup = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -37,6 +37,7 @@ const Signup = () => {
 
 	return (
 		<>
+			<Main></Main>
 			<div>
 				<div className="blockForm2">
 					<form className="formLogin2" onSubmit={handleSubmit}>

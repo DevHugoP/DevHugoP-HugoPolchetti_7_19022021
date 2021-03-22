@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.css";
 import history from "../../../history";
+import Main from "../../mainPage/Main";
 
-const Login = () => {
+const Login = (props) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -26,6 +27,7 @@ const Login = () => {
 
 	return (
 		<>
+			<Main />
 			<div className="blockLogin">
 				<div className="blockForm">
 					<form className="formLogin" onSubmit={handleSubmit}>

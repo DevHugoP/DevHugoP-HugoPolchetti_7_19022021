@@ -15,17 +15,8 @@ const Message = () => {
 	const getMessageDetails = () => {
 		axios.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`).then(function (res) {
 			console.log(res.data);
-			setMessages([
-				res.data.id,
-				res.data.title,
-				res.data.content,
-				res.data.attachement,
-				res.data.userId,
-				res.data.createdAt
-			]);
-			console.log(res.data.Comments);
+			setMessages(res.data);
 			setComments(res.data.Comments);
-			console.log(res.data.User);
 			setUsers(res.data.User);
 		});
 	};
@@ -38,19 +29,19 @@ const Message = () => {
 			<div className="messageContainer">
 				<h1>Message + commentaires</h1>
 				<div className="messageCard">
-					<h3>Titre : {messages[1]}</h3>
-					<p>contenu : {messages[2]}</p>
-					<p>Crée il y a : {moment(messages[5]).fromNow()}</p>
+					<h3>Titre : {messages.title}</h3>
+					<p>contenu : {messages.content}</p>
+					<p>Crée il y a : {moment(messages.createdAt).fromNow()}</p>
 					<div className="commentsCard">
-						<p>
-							{comments.map((test) => {
+						<div>
+							{comments.map((comment) => {
 								return (
-									<div key={test.id}>
-										<p>{test.content}</p>
+									<div key={comment.id}>
+										<p>{comment.content}</p>
 									</div>
 								);
 							})}
-						</p>
+						</div>
 						{/* <p>{comments[0].content}</p>
 						<p>{moment(comments[0].createdAt).fromNow()}</p> */}
 					</div>

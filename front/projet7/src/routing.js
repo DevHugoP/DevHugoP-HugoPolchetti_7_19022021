@@ -1,14 +1,18 @@
+//Pages
 import Login from "./components/auth/login/Login";
 import Signup from "./components/auth/signup/Signup";
 import Main from "./components/mainPage/Main";
 import Home from "./components/homepage/homepage";
 import Message from "./components/message/message";
+//TOOLS
 import AuthRoute from "./components/auth/AuthRoute";
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import jwtDecode from "jwt-decode";
+//REDUX
 
+//logique AUTHENFICATION//
 let authenticated;
 const token = localStorage.Token;
 if (token) {
@@ -24,28 +28,22 @@ if (token) {
 const ReactRouterSetup = () => {
 	return (
 		<Router history={history}>
-			<Route exact path="/">
-				<Main />
-				<Login />
-			</Route>
-			<AuthRoute path="/login" component={(Main, Login)} authenticated={authenticated}>
-				<Main />
-				<Login />
-			</AuthRoute>
-			<AuthRoute path="/signup" component={(Main, Signup)} authenticated={authenticated}>
-				<Main />
-				<Signup />
-			</AuthRoute>
-			<AuthRoute path="/home" component={Home} authenticated={authenticated}>
-				<Home />
-			</AuthRoute>
-			<AuthRoute path="/messages" component={Message} authenticated={authenticated}>
-				<Message />
-			</AuthRoute>
+			<AuthRoute
+				exact
+				path="/login"
+				component={Login}
+				authenticated={authenticated}
+			></AuthRoute>
+			<AuthRoute
+				exact
+				path="/signup"
+				component={Signup}
+				authenticated={authenticated}
+			></AuthRoute>
+			<Route exact path="/home" component={Home}></Route>
+			<Route path="/messages" component={Message}></Route>
 		</Router>
 	);
 };
 
 export default ReactRouterSetup;
-
-// {`/messages/${message.id}`}
