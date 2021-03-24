@@ -42,8 +42,6 @@ const Message = () => {
 								);
 							})}
 						</div>
-						{/* <p>{comments[0].content}</p>
-						<p>{moment(comments[0].createdAt).fromNow()}</p> */}
 					</div>
 				</div>
 			</div>

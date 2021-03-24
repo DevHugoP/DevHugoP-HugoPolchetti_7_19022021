@@ -38,6 +38,7 @@ const Login = (props) => {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="Adresse e-mail"
+								className="inputBloc"
 							/>
 						</div>
 						<div>
@@ -47,6 +48,7 @@ const Login = (props) => {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder="Mot de passe"
+								className="inputBloc"
 							/>
 						</div>
 						<button className="loginBtn" type="submit">

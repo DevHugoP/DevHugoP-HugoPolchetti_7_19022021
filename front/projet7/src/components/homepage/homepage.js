@@ -28,25 +28,34 @@ const Home = () => {
 	const deleteMyMessage = (id) => {
 		axios.delete("http://localhost:5000/api/messages/" + `${id}`).then(function (res) {
 			console.log("suppression réussie");
+			alert("suppression réussie");
 			getMessages();
 		});
 	};
 
-	const onClick = () => {
+	const booleanSwitch = () => {
 		if (showNewMessageForm) {
 			setShowNewMessageForm(false);
 		} else setShowNewMessageForm(true);
+	};
+
+	const deconnexion = () => {
+		localStorage.clear();
+		window.location.href = "http://localhost:3000/login";
 	};
 
 	return (
 		<>
 			<div className="hp_container1">
 				<div className="backgroundPic2">
+					<button className="logOutBtn" onClick={() => deconnexion()}>
+						Deconnexion
+					</button>
 					<h1 className="hp_mainTitle"> Messages Recents </h1>
-					<Link to="/login">TEST</Link>
 					<div className="createMessage">
-						<h2>Creer un nouveau message</h2>
-						<button onClick={() => onClick()}> + </button>
+						<button onClick={() => booleanSwitch()} className="newBtn">
+							Créer un nouveau message
+						</button>
 						{showNewMessageForm ? <AddnewMessage /> : null}
 					</div>
 					<div className="homepage_container">

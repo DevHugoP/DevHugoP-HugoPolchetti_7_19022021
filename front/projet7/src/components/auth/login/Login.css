@@ -52,7 +52,7 @@
 	gap: 1rem;
 }
 
-input {
+.inputBloc {
 	height: 40px;
 	width: 270px;
 	border: 1px solid #bbb;

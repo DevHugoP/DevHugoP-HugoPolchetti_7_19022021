@@ -11,6 +11,7 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
+
 	/* Preserve aspet ratio */
 }
 .hp_mainTitle {
@@ -23,14 +24,44 @@
 	margin: 2rem;
 	color: #f1e9e9;
 }
+.logOutBtn {
+	position: absolute;
+	top: 4%;
+	left: 80%;
+	height: 50px;
+	width: 150px;
+	border: 1px solid #bbb;
+	background-color: #e61e39;
+	color: white;
+	border-radius: 0.34rem;
+	font-size: 1.1rem;
+	font-weight: 600;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+}
 .createMessage {
 	display: flex;
+	flex-direction: column;
 	font-family: "Roboto", "Sans serif";
-	font-weight: 500;
+	font-weight: 700;
+	font-size: 1.2rem;
 	align-items: center;
 	justify-content: center;
-	color: #d31d1d;
+	color: #000000;
 }
+.newBtn {
+	height: 45px;
+	width: 340px;
+	border: 1px solid #bbb;
+	background-color: #1877f2;
+	color: white;
+	border-radius: 0.34rem;
+	font-size: 1.3rem;
+	font-weight: 600;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+}
+
 .homepage_container {
 	display: flex;
 	flex-direction: column;

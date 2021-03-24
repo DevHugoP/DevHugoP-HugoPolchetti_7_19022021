@@ -48,6 +48,7 @@ const Signup = () => {
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 								placeholder="Pseudo"
+								className="inputBloc"
 							/>
 						</div>
 						<div>
@@ -57,6 +58,7 @@ const Signup = () => {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="Adresse e-mail"
+								className="inputBloc"
 							/>
 						</div>
 						<div>
@@ -66,6 +68,7 @@ const Signup = () => {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder="Mot de passe"
+								className="inputBloc"
 							/>
 						</div>
 						<div>
@@ -75,6 +78,7 @@ const Signup = () => {
 								value={confirmPassword}
 								onChange={(e) => setConfirmPassword(e.target.value)}
 								placeholder=" Confirmer Mot de passe"
+								className="inputBloc"
 							/>
 						</div>
 
