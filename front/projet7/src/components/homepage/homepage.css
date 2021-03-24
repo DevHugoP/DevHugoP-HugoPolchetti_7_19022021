@@ -1,6 +1,8 @@
 .hp_container1 {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 .backgroundPic2 {
 	background: url("../../images/mac.jpg") no-repeat center center fixed;
@@ -20,6 +22,14 @@
 	align-items: center;
 	margin: 2rem;
 	color: #f1e9e9;
+}
+.createMessage {
+	display: flex;
+	font-family: "Roboto", "Sans serif";
+	font-weight: 500;
+	align-items: center;
+	justify-content: center;
+	color: #d31d1d;
 }
 .homepage_container {
 	display: flex;

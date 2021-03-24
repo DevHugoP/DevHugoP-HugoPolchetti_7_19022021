@@ -50,26 +50,35 @@ exports.getOneMessage = (req, res, next) => {
 };
 
 exports.deleteMessage = (req, res, next) => {
-	db.Message.findOne({
+	db.Message.destroy({
 		where: {
 			id: req.params.id
 		}
 	})
-		.then((message) => {
-			const filename = message.attachement.split("/images/")[1];
-			fs.unlink(`images/${filename}`, () => {
-				db.Message.destroy({
-					where: {
-						id: req.params.id
-					}
-				})
-					.then(() => res.status(200).json({ message: "Message supprimé !" }))
-					.catch((error) => res.status(400).json({ error }));
-			});
-		})
-		.catch((error) => res.status(500).json({ error }));
+		.then(() => res.status(200).json({ message: "Message supprimé !" }))
+		.catch((error) => res.status(400).json({ error }));
 };
 
+// exports.deleteMessage = (req, res, next) => {
+// 	db.Message.findOne({
+// 		where: {
+// 			id: req.params.id
+// 		}
+// 	})
+// 		.then((message) => {
+// 			const filename = message.attachement.split("/images/")[1];
+// 			fs.unlink(`images/${filename}`, () => {
+// 				db.Message.destroy({
+// 					where: {
+// 						id: req.params.id
+// 					}
+// 				})
+// 					.then(() => res.status(200).json({ message: "Message supprimé !" }))
+// 					.catch((error) => res.status(400).json({ error }));
+// 			});
+// 		})
+// 		.catch((error) => res.status(500).json({ error }));
+// };
 exports.modifyMessage = (req, res, next) => {
 	if (req.file) {
 		db.Message.findOne({

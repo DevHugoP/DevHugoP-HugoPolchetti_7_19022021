@@ -12,7 +12,7 @@ import history from "./history";
 import jwtDecode from "jwt-decode";
 //REDUX
 
-//logique AUTHENFICATION//
+//logique AUTHENFICATION// permet de rediriger l'utilisateur si il clique sur login ou signup en etant co ou le rediriger vers les pages de connexions lorsque son token expire
 let authenticated;
 const token = localStorage.Token;
 if (token) {
@@ -25,6 +25,7 @@ if (token) {
 		authenticated = true;
 	}
 }
+
 const ReactRouterSetup = () => {
 	return (
 		<Router history={history}>
