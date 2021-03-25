@@ -18,7 +18,7 @@ const Login = (props) => {
 				.then(function (res) {
 					localStorage.setItem("Token", `Bearer ${res.data.token}`);
 					console.log("you are connected");
-					history.push("/home");
+					window.location.href = "http://localhost:3000/home";
 				});
 		} else {
 			console.log("il manque des informations");

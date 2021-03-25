@@ -3,9 +3,8 @@ import React from "react";
 import { useState } from "react";
 import "./addNewMessage.css";
 
-const AddNewMessage = () => {
-	let currentUser = localStorage.userIdOwner;
-	const [userId, setUserId] = useState(currentUser);
+const AddNewMessage = (props) => {
+	let userId = props.currentUser;
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	//récuperation de l'identité du user
@@ -32,9 +31,6 @@ const AddNewMessage = () => {
 	return (
 		<>
 			<form className="formNewMessage1" onSubmit={handleSubmit}>
-				<div>
-					<input type="hidden" name="userId" value={currentUser} />
-				</div>
 				<div>
 					<input
 						type="messageTitle"

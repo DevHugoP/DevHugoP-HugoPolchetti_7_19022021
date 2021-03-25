@@ -9,7 +9,7 @@ import AddnewMessage from "./addNewMessage";
 
 const Home = () => {
 	//récuperation de l'identité du user
-	let currentUser = localStorage.userIdOwner;
+	let currentUser = localStorage.currentUser;
 
 	const [messages, setMessages] = useState([]);
 	const [showNewMessageForm, setShowNewMessageForm] = useState(false);
@@ -56,7 +56,7 @@ const Home = () => {
 						<button onClick={() => booleanSwitch()} className="newBtn">
 							Créer un nouveau message
 						</button>
-						{showNewMessageForm ? <AddnewMessage /> : null}
+						{showNewMessageForm ? <AddnewMessage currentUser={currentUser} /> : null}
 					</div>
 					<div className="homepage_container">
 						{messages.map((message) => {
@@ -64,20 +64,32 @@ const Home = () => {
 								<div className="hp_messagesBox" key={message.id}>
 									{[message.User].map((user) => {
 										return (
-											<div key={user.id}>
-												<h4>Nom d'utilisateur : {user.username}</h4>
-												<h4> Titre : {message.title}</h4>
-												<h4>{message.content}</h4>
+											<div key={user.id} className="hp_blocText">
+												<h4 className="hp_username"> {user.username}</h4>
+												<div className="hp_midContentBox">
+													<h4 className="hp_title">{message.title}</h4>
+													<h4 className="hp_content">
+														{message.content}
+													</h4>
+												</div>
+
 												<h5>
 													Created : {moment(message.createdAt).fromNow()}
 												</h5>
 												<h6>{message.attachement}</h6>
 												<div className="hp_modifiers">
-													<Link to={`./messages/${message.id}`}>
-														Commentaires
-													</Link>
+													<button className="hp_linkCommentsBtn">
+														<Link
+															to={`./messages/${message.id}`}
+															className="hp_linkComments"
+														>
+															Commenter {message.Comments.length}
+														</Link>
+													</button>
+
 													{user.id == currentUser ? (
 														<button
+															className="hp_deleteBtn"
 															onClick={() =>
 																deleteMyMessage(message.id)
 															}
@@ -86,7 +98,14 @@ const Home = () => {
 														</button>
 													) : null}
 													{user.id == currentUser ? (
-														<button>Modifier</button>
+														<button className="hp_modifyBtn">
+															<Link
+																to={`./modifyMessage/${message.id}`}
+																className="hp_linkComments"
+															>
+																Modifier
+															</Link>
+														</button>
 													) : null}
 												</div>
 											</div>

@@ -14,15 +14,14 @@
 
 	/* Preserve aspet ratio */
 }
+
 .hp_mainTitle {
-	font-family: "Roboto", "Sans serif";
-	font-weight: 500;
-	font-size: 2.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-weight: 900;
+	font-size: 3.5rem;
 	margin: 2rem;
-	color: #f1e9e9;
 }
 .logOutBtn {
 	position: absolute;
@@ -50,6 +49,7 @@
 	color: #000000;
 }
 .newBtn {
+	margin-bottom: 0.8rem;
 	height: 45px;
 	width: 340px;
 	border: 1px solid #bbb;
@@ -70,10 +70,28 @@
 	align-items: center;
 	padding: 2rem;
 }
+.hp_blocText {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.hp_username {
+	font-size: 1.2rem;
+}
+.hp_title {
+	margin: 1rem;
+	display: flex;
+	justify-content: center;
+}
+
+.hp_content {
+	padding: 3%;
+}
 
 .hp_messagesBox {
-	width: 450px;
-	height: 220px;
+	width: 550px;
+	height: 250px;
+	box-sizing: content-box;
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
@@ -89,5 +107,49 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	padding-top: 45px;
+	padding-top: 20px;
+}
+
+.hp_deleteBtn {
+	color: white;
+	margin-bottom: 0.8rem;
+	height: 35px;
+	width: 120px;
+	border: 1px solid #bbb;
+	background-color: #e61e39;
+	border-radius: 0.34rem;
+	font-size: 1rem;
+	font-weight: 600;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+}
+.hp_modifyBtn {
+	margin-bottom: 0.8rem;
+	height: 35px;
+	width: 120px;
+	border: 1px solid #bbb;
+	background-color: #1877f2;
+	color: white;
+	border-radius: 0.34rem;
+	font-size: 1rem;
+	font-weight: 600;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.hp_linkComments {
+	text-decoration: none;
+	color: white;
+}
+.hp_linkCommentsBtn {
+	margin-bottom: 0.8rem;
+	height: 35px;
+	width: 120px;
+	border: 1px solid #bbb;
+	background-color: #1877f2;
+	border-radius: 0.34rem;
+	font-size: 1rem;
+	font-weight: 600;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
 }
