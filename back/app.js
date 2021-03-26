@@ -5,6 +5,7 @@ const messageRoutes = require("./routes/message");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
 const { Sequelize } = require("sequelize");
+const multer = require("multer");
 
 // Connexion DB
 const sequelize = new Sequelize("database_development2", "root", "polchetti59", {
@@ -19,8 +20,6 @@ sequelize
 const app = express();
 // parse application/json
 
-app.use("/images", express.static(path.join(__dirname, "images")));
-
 // CORS
 app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");
@@ -32,7 +31,7 @@ app.use((req, res, next) => {
 	next();
 });
 app.use(express.json());
-
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/messages", messageRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/comments", commentRoutes);

@@ -2,6 +2,7 @@ const fs = require("fs");
 const Message = require("../models/Message");
 const User = require("../models/User");
 const db = require("../models");
+const fileUpload = require("express-fileupload");
 
 exports.getAllMessage = (req, res, next) => {
 	db.Message.findAll({
@@ -18,15 +19,23 @@ exports.getAllMessage = (req, res, next) => {
 };
 
 exports.createMessage = async (req, res, next) => {
-	const messageObject = req.body;
+	const messageObject = JSON.parse(req.body.message);
 	const message = await db.Message.create({
 		userId: messageObject.userId,
 		title: messageObject.title,
 		content: messageObject.content,
-		attachement: messageObject.attachement
-	});
-	res.status(200).json(message);
-	console.log(req.body);
+		attachement: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+	})
+
+		.then((message) => {
+			res.status(200).json(message);
+			console.log(req.file);
+		})
+		.catch((error) => {
+			res.status(404).json({
+				error: error
+			});
+		});
 };
 
 exports.getOneMessage = (req, res, next) => {
