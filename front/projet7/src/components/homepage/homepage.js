@@ -6,6 +6,7 @@ import history from "../../history";
 import moment from "moment";
 import "./homepage.css";
 import AddnewMessage from "./addNewMessage";
+import ShowImages from "../../showImages";
 
 const Home = () => {
 	//récuperation de l'identité du user
@@ -66,8 +67,15 @@ const Home = () => {
 										return (
 											<div key={user.id} className="hp_blocText">
 												<h4 className="hp_username"> {user.username}</h4>
+
 												<div className="hp_midContentBox">
-													<h4 className="hp_title">{message.title}</h4>
+													<h3 className="hp_title">{message.title}</h3>
+													<div className="hp_imageBox">
+														<img
+															src={message.attachement}
+															className="hp_img"
+														></img>
+													</div>
 													<h4 className="hp_content">
 														{message.content}
 													</h4>
@@ -76,7 +84,6 @@ const Home = () => {
 												<h5>
 													Created : {moment(message.createdAt).fromNow()}
 												</h5>
-												<h6>{message.attachement}</h6>
 												<div className="hp_modifiers">
 													<button className="hp_linkCommentsBtn">
 														<Link

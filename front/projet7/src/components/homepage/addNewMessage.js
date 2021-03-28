@@ -9,7 +9,6 @@ const AddNewMessage = (props) => {
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState("");
 
-	//récuperation de l'identité du user
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
@@ -27,6 +26,25 @@ const AddNewMessage = (props) => {
 		} else console.log("il manque des infos ");
 	};
 
+	function previewFile() {
+		var preview = document.querySelector("img");
+		var file = image;
+		var reader = new FileReader();
+
+		reader.addEventListener(
+			"load",
+			function () {
+				preview.src = reader.result;
+			},
+			false
+		);
+
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	}
+	previewFile();
+
 	return (
 		<>
 			<form className="formNewMessage1" onSubmit={handleSubmit}>
@@ -40,9 +58,12 @@ const AddNewMessage = (props) => {
 						className="inputBlocTitle"
 					/>
 				</div>
+
 				<label htmlFor="file">
 					<input type="file" name="file" onChange={(e) => setImage(e.target.files[0])} />
 				</label>
+				<img alt="Aperçu de l’image..." />
+
 				<div>
 					<textarea
 						type="text"
