@@ -34,8 +34,8 @@ const Home = () => {
 		});
 	};
 
-	const booleanSwitch = () => {
-		if (showNewMessageForm) {
+	const booleanSwitch = (varSwitch) => {
+		if (varSwitch) {
 			setShowNewMessageForm(false);
 		} else setShowNewMessageForm(true);
 	};
@@ -54,7 +54,10 @@ const Home = () => {
 					</button>
 					<h1 className="hp_mainTitle"> Messages Recents </h1>
 					<div className="createMessage">
-						<button onClick={() => booleanSwitch()} className="newBtn">
+						<button
+							onClick={() => booleanSwitch(showNewMessageForm)}
+							className="newBtn"
+						>
 							Créer un nouveau message
 						</button>
 						{showNewMessageForm ? <AddnewMessage currentUser={currentUser} /> : null}
@@ -67,6 +70,9 @@ const Home = () => {
 										return (
 											<div key={user.id} className="hp_blocText">
 												<h4 className="hp_username"> {user.username}</h4>
+												<h5 className="hp_created">
+													Created : {moment(message.createdAt).fromNow()}
+												</h5>
 
 												<div className="hp_midContentBox">
 													<h3 className="hp_title">{message.title}</h3>
@@ -81,9 +87,6 @@ const Home = () => {
 													</h4>
 												</div>
 
-												<h5>
-													Created : {moment(message.createdAt).fromNow()}
-												</h5>
 												<div className="hp_modifiers">
 													<button className="hp_linkCommentsBtn">
 														<Link
@@ -101,7 +104,7 @@ const Home = () => {
 																deleteMyMessage(message.id)
 															}
 														>
-															supprimer
+															Supprimer
 														</button>
 													) : null}
 													{user.id == currentUser ? (

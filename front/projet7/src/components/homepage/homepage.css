@@ -82,12 +82,12 @@
 	width: 100%;
 }
 .hp_username {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	position: relative;
 	right: 40%;
 	border: solid black 1px;
-	border-radius: 8px;
-	padding: 0.7rem;
+	border-radius: 12px;
+	padding: 0.8rem;
 }
 .hp_title {
 	font-size: 1.4rem;
@@ -126,9 +126,17 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	padding-top: 20px;
+	gap: 1.8rem;
 }
-
+.hp_midContentBox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.hp_created {
+	position: relative;
+	right: 35%;
+}
 .hp_deleteBtn {
 	color: white;
 	margin-bottom: 0.8rem;
@@ -147,7 +155,7 @@
 	height: 35px;
 	width: 120px;
 	border: 1px solid #bbb;
-	background-color: #1877f2;
+	background-color: #ee7829;
 	color: white;
 	border-radius: 0.34rem;
 	font-size: 1rem;

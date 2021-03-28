@@ -12,7 +12,9 @@ const AddNewMessage = (props) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append("image", image);
+		if (image !== "") {
+			formData.append("image", image);
+		}
 		formData.append("message", JSON.stringify({ userId, title, content }));
 
 		if (title && content !== "") {

@@ -73,7 +73,7 @@ const Signup = () => {
 						</div>
 						<div>
 							<input
-								type="confirmPassword"
+								type="password"
 								name="confirmPassword"
 								value={confirmPassword}
 								onChange={(e) => setConfirmPassword(e.target.value)}

@@ -2,7 +2,6 @@ const fs = require("fs");
 const Message = require("../models/Message");
 const User = require("../models/User");
 const db = require("../models");
-const fileUpload = require("express-fileupload");
 
 exports.getAllMessage = (req, res, next) => {
 	db.Message.findAll({
@@ -20,11 +19,23 @@ exports.getAllMessage = (req, res, next) => {
 
 exports.createMessage = async (req, res, next) => {
 	const messageObject = JSON.parse(req.body.message);
+	console.log(messageObject);
+	testBoolean = false;
+	const test = () => {
+		if (req.file == undefined) {
+			testBoolean = false;
+		} else {
+			testBoolean = true;
+		}
+	};
+	test();
 	const message = await db.Message.create({
 		userId: messageObject.userId,
 		title: messageObject.title,
 		content: messageObject.content,
-		attachement: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+		attachement: testBoolean
+			? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+			: null
 	})
 
 		.then((message) => {
@@ -59,35 +70,43 @@ exports.getOneMessage = (req, res, next) => {
 };
 
 exports.deleteMessage = (req, res, next) => {
-	db.Message.destroy({
-		where: {
-			id: req.params.id
-		}
-	})
-		.then(() => res.status(200).json({ message: "Message supprimé !" }))
-		.catch((error) => res.status(400).json({ error }));
+	if (req.file) {
+		db.Message.findOne({
+			where: {
+				id: req.params.id
+			}
+		})
+			.then((message) => {
+				const filename = message.attachement.split("/images/")[1];
+				fs.unlink(`images/${filename}`, () => {
+					db.Message.destroy({
+						where: {
+							id: req.params.id
+						}
+					})
+						.then(() => res.status(200).json({ message: "Message supprimé !" }))
+						.catch((error) => res.status(400).json({ error }));
+				});
+			})
+			.catch((error) => res.status(500).json({ error }));
+	} else {
+		db.Message.findOne({
+			where: {
+				id: req.params.id
+			}
+		})
+			.then((message) => {
+				db.Message.destroy({
+					where: {
+						id: req.params.id
+					}
+				})
+					.then(() => res.status(200).json({ message: "Message supprimé !" }))
+					.catch((error) => res.status(400).json({ error }));
+			})
+			.catch((error) => res.status(500).json({ error }));
+	}
 };
-
-// exports.deleteMessage = (req, res, next) => {
-// 	db.Message.findOne({
-// 		where: {
-// 			id: req.params.id
-// 		}
-// 	})
-// 		.then((message) => {
-// 			const filename = message.attachement.split("/images/")[1];
-// 			fs.unlink(`images/${filename}`, () => {
-// 				db.Message.destroy({
-// 					where: {
-// 						id: req.params.id
-// 					}
-// 				})
-// 					.then(() => res.status(200).json({ message: "Message supprimé !" }))
-// 					.catch((error) => res.status(400).json({ error }));
-// 			});
-// 		})
-// 		.catch((error) => res.status(500).json({ error }));
-// };
 exports.modifyMessage = (req, res, next) => {
 	if (req.file) {
 		db.Message.findOne({
