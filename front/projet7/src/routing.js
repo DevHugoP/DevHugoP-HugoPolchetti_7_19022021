@@ -20,6 +20,7 @@ const ReactRouterSetup = () => {
 		const decodedToken = jwtDecode(token);
 		console.log(new Date(decodedToken.exp * 1000), decodedToken.where.userId);
 		if (decodedToken.exp * 1000 < Date.now()) {
+			localStorage.clear();
 			window.location.href = "/login";
 			authenticated = false;
 		} else {
