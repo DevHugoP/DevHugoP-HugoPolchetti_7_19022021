@@ -1,16 +1,15 @@
 //Pages
 import Login from "./components/auth/login/Login";
 import Signup from "./components/auth/signup/Signup";
-import Main from "./components/mainPage/Main";
 import Home from "./components/homepage/homepage";
-import Message from "./components/message/message";
+import ModifyMessage from "./components/message/modifyMessage";
+
 //TOOLS
 import AuthRoute from "./components/auth/AuthRoute";
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import jwtDecode from "jwt-decode";
-//REDUX
 
 const ReactRouterSetup = () => {
 	//logique AUTHENFICATION// permet de rediriger l'utilisateur si il clique sur login ou signup en etant co ou le rediriger vers les pages de connexions lorsque son token expire
@@ -48,7 +47,7 @@ const ReactRouterSetup = () => {
 				authenticated={authenticated}
 			></AuthRoute>
 			<Route exact path="/home" component={Home}></Route>
-			<Route path="/messages" component={Message}></Route>
+			<Route path="/modifyMessage" component={ModifyMessage}></Route>
 		</Router>
 	);
 };

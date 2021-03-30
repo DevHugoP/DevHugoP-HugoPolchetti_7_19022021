@@ -6,11 +6,13 @@ import history from "../../history";
 import moment from "moment";
 import "./homepage.css";
 import AddnewMessage from "./addNewMessage";
-import ShowImages from "../../showImages";
 
 const Home = () => {
 	//récuperation de l'identité du user
 	let currentUser = localStorage.currentUser;
+	if (localStorage.length === 0) {
+		window.location.href = "http://localhost:3000/login";
+	}
 
 	const [messages, setMessages] = useState([]);
 	const [showNewMessageForm, setShowNewMessageForm] = useState(false);
@@ -22,6 +24,7 @@ const Home = () => {
 			setMessages(messages.messages);
 		});
 	};
+
 	useEffect(() => {
 		getMessages();
 	}, []);

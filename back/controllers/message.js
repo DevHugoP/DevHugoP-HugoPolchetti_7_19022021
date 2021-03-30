@@ -19,7 +19,8 @@ exports.getAllMessage = (req, res, next) => {
 
 exports.createMessage = async (req, res, next) => {
 	const messageObject = JSON.parse(req.body.message);
-	console.log(messageObject);
+	const testReqFile = req.file;
+	console.log(testReqFile);
 	testBoolean = false;
 	const test = () => {
 		if (req.file == undefined) {
@@ -40,7 +41,6 @@ exports.createMessage = async (req, res, next) => {
 
 		.then((message) => {
 			res.status(200).json(message);
-			console.log(req.file);
 		})
 		.catch((error) => {
 			res.status(404).json({
@@ -70,32 +70,14 @@ exports.getOneMessage = (req, res, next) => {
 };
 
 exports.deleteMessage = (req, res, next) => {
-	if (req.file) {
-		db.Message.findOne({
-			where: {
-				id: req.params.id
-			}
-		})
-			.then((message) => {
-				const filename = message.attachement.split("/images/")[1];
-				fs.unlink(`images/${filename}`, () => {
-					db.Message.destroy({
-						where: {
-							id: req.params.id
-						}
-					})
-						.then(() => res.status(200).json({ message: "Message supprimé !" }))
-						.catch((error) => res.status(400).json({ error }));
-				});
-			})
-			.catch((error) => res.status(500).json({ error }));
-	} else {
-		db.Message.findOne({
-			where: {
-				id: req.params.id
-			}
-		})
-			.then((message) => {
+	db.Message.findOne({
+		where: {
+			id: req.params.id
+		}
+	})
+		.then((message) => {
+			const filename = message.attachement.split("/images/")[1];
+			fs.unlink(`images/${filename}`, () => {
 				db.Message.destroy({
 					where: {
 						id: req.params.id
@@ -103,12 +85,17 @@ exports.deleteMessage = (req, res, next) => {
 				})
 					.then(() => res.status(200).json({ message: "Message supprimé !" }))
 					.catch((error) => res.status(400).json({ error }));
-			})
-			.catch((error) => res.status(500).json({ error }));
-	}
+			});
+		})
+		.catch((error) => res.status(500).json({ error }));
 };
+
 exports.modifyMessage = (req, res, next) => {
-	if (req.file) {
+	const message = JSON.parse(req.body.message);
+	console.log(message);
+	console.log(req.body.image);
+	console.log(req.params.id);
+	if (req.file !== null) {
 		db.Message.findOne({
 			where: {
 				id: req.params.id
@@ -122,7 +109,7 @@ exports.modifyMessage = (req, res, next) => {
 	const messageObject = req.file
 		? {
 				...JSON.parse(req.body.message),
-				imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+				attachement: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
 		  }
 		: { ...req.body };
 	db.Message.update(
