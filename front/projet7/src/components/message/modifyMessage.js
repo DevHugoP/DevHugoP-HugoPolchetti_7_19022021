@@ -14,6 +14,7 @@ const ModifyMessage = () => {
 	const [image, setImage] = useState("");
 	const [showBtn, setShowBtn] = useState();
 	const [attachement, setAttachement] = useState(null);
+	const [asChanged, setAsChanged] = useState(false);
 
 	let urlMessages = window.location.href;
 	let recupIdPage = urlMessages.split("Message/");
@@ -36,11 +37,13 @@ const ModifyMessage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		if (image !== "" || null) {
+		if (image !== "") {
 			formData.append("image", image);
 			formData.append("message", JSON.stringify({ title, content }));
-		} else {
+		} else if (asChanged == true) {
 			formData.append("message", JSON.stringify({ title, content, attachement }));
+		} else {
+			formData.append("message", JSON.stringify({ title, content }));
 		}
 
 		axios
@@ -80,6 +83,7 @@ const ModifyMessage = () => {
 		var selectId = document.getElementById("messageImg");
 		selectId.src = null;
 		setAttachement(null);
+		setAsChanged(true);
 	}
 
 	return (

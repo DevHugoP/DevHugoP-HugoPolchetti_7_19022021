@@ -76,8 +76,18 @@ exports.deleteMessage = (req, res, next) => {
 		}
 	})
 		.then((message) => {
-			const filename = message.attachement.split("/images/")[1];
-			fs.unlink(`images/${filename}`, () => {
+			if (message.attachement) {
+				const filename = message.attachement.split("/images/")[1];
+				fs.unlink(`images/${filename}`, () => {
+					db.Message.destroy({
+						where: {
+							id: req.params.id
+						}
+					})
+						.then(() => res.status(200).json({ message: "Message supprimé !" }))
+						.catch((error) => res.status(400).json({ error }));
+				});
+			} else {
 				db.Message.destroy({
 					where: {
 						id: req.params.id
@@ -85,7 +95,7 @@ exports.deleteMessage = (req, res, next) => {
 				})
 					.then(() => res.status(200).json({ message: "Message supprimé !" }))
 					.catch((error) => res.status(400).json({ error }));
-			});
+			}
 		})
 		.catch((error) => res.status(500).json({ error }));
 };
@@ -93,17 +103,10 @@ exports.deleteMessage = (req, res, next) => {
 exports.modifyMessage = async (req, res, next) => {
 	const message = JSON.parse(req.body.message);
 	console.log(message);
+	console.log(message.attachement);
 	console.log("on test req.file" + req.file);
-	testBoolean = false;
-	const test = () => {
-		if (req.file == undefined) {
-			testBoolean = false;
-		} else {
-			testBoolean = true;
-		}
-	};
-	test();
-	if (req.file || message.attachement == null) {
+
+	if (req.file !== undefined || message.attachement === null) {
 		db.Message.findOne({
 			where: {
 				id: req.params.id
