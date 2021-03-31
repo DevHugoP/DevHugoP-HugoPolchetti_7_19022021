@@ -90,17 +90,26 @@ exports.deleteMessage = (req, res, next) => {
 		.catch((error) => res.status(500).json({ error }));
 };
 
-exports.modifyMessage = (req, res, next) => {
+exports.modifyMessage = async (req, res, next) => {
 	const message = JSON.parse(req.body.message);
 	console.log(message);
-	console.log(req.body.image);
-	console.log(req.params.id);
-	if (req.file !== null) {
+	console.log("on test req.file" + req.file);
+	testBoolean = false;
+	const test = () => {
+		if (req.file == undefined) {
+			testBoolean = false;
+		} else {
+			testBoolean = true;
+		}
+	};
+	test();
+	if (req.file || message.attachement == null) {
 		db.Message.findOne({
 			where: {
 				id: req.params.id
 			}
 		}).then((message) => {
+			console.log("on est dans la réponse avec file" + message.attachement);
 			const filename = message.attachement.split("/images/")[1];
 			fs.unlink(`images/${filename}`, () => {});
 		});
@@ -108,21 +117,15 @@ exports.modifyMessage = (req, res, next) => {
 
 	const messageObject = req.file
 		? {
-				...JSON.parse(req.body.message),
+				...message,
 				attachement: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
 		  }
-		: { ...req.body };
+		: { ...message };
+
 	db.Message.update(
+		{ ...messageObject },
 		{
-			...messageObject,
-			where: {
-				id: req.params.id
-			}
-		},
-		{
-			where: {
-				id: req.params.id
-			}
+			where: { id: req.params.id }
 		}
 	)
 		.then(() => res.status(200).json({ message: "Message modifié !" }))

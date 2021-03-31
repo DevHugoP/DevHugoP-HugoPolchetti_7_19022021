@@ -13,7 +13,7 @@ const ModifyMessage = () => {
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState("");
 	const [showBtn, setShowBtn] = useState();
-	const [file, setFile] = useState("");
+	const [attachement, setAttachement] = useState("");
 
 	let urlMessages = window.location.href;
 	let recupIdPage = urlMessages.split("Message/");
@@ -36,10 +36,12 @@ const ModifyMessage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		if (image !== "") {
+		if (image !== "" || null) {
 			formData.append("image", image);
+			formData.append("message", JSON.stringify({ title, content }));
+		} else {
+			formData.append("message", JSON.stringify({ title, content, attachement }));
 		}
-		formData.append("message", JSON.stringify({ title, content }));
 
 		axios
 			.put(`http://localhost:5000/api/messages/${recupIdPage[1]}`, formData)
@@ -77,7 +79,7 @@ const ModifyMessage = () => {
 	function changeImg() {
 		var selectId = document.getElementById("messageImg");
 		selectId.src = null;
-		setImage(null);
+		setAttachement(null);
 	}
 
 	return (
