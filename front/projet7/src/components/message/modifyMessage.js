@@ -13,7 +13,7 @@ const ModifyMessage = () => {
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState("");
 	const [showBtn, setShowBtn] = useState();
-	const [attachement, setAttachement] = useState("");
+	const [attachement, setAttachement] = useState(null);
 
 	let urlMessages = window.location.href;
 	let recupIdPage = urlMessages.split("Message/");
