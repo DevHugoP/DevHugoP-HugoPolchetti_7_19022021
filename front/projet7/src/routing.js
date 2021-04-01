@@ -34,6 +34,9 @@ const ReactRouterSetup = () => {
 		localStorage.setItem("currentUser", decodedToken.where.userId);
 	} else localStorage.clear();
 
+	if (localStorage.length === 0) {
+		window.location.href = "http://localhost:3000/login";
+	}
 	return (
 		<Router history={history}>
 			<AuthRoute

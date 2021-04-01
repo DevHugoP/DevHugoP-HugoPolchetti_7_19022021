@@ -10,9 +10,6 @@ import AddnewMessage from "./addNewMessage";
 const Home = () => {
 	//récuperation de l'identité du user
 	let currentUser = localStorage.currentUser;
-	if (localStorage.length === 0) {
-		window.location.href = "http://localhost:3000/login";
-	}
 
 	const [messages, setMessages] = useState([]);
 	const [showNewMessageForm, setShowNewMessageForm] = useState(false);

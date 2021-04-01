@@ -4,16 +4,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import history from "../../history";
 import moment from "moment";
+import AddComments from "./../comments/comments";
 
 const Message = () => {
+	//récuperation de l'identité du user
+	let userId = localStorage.currentUser;
+
 	const [messages, setMessages] = useState([]);
+	const [messageId, setMessageId] = useState("");
 	const [user, setUser] = useState("");
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
-	const [image, setImage] = useState("");
-	const [showBtn, setShowBtn] = useState();
-	const [attachement, setAttachement] = useState(null);
-	const [asChanged, setAsChanged] = useState(false);
+	const [showCommentForm, setShowCommentForm] = useState(false);
+	const [comments, setComments] = useState([]);
 
 	let urlMessages = window.location.href;
 	let recupIdPage = urlMessages.split("messages/");
@@ -25,54 +28,59 @@ const Message = () => {
 			setUser(res.data.User.username);
 			setTitle(res.data.title);
 			setContent(res.data.content);
-			if (res.data.attachement == null) {
-				setShowBtn(false);
-			} else {
-				setShowBtn(true);
-			}
+			setMessageId(res.data.id);
+			setComments(res.data.Comments);
 		});
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const formData = new FormData();
-		if (image !== "") {
-			formData.append("image", image);
-			formData.append("message", JSON.stringify({ title, content }));
-		} else if (asChanged == true) {
-			formData.append("message", JSON.stringify({ title, content, attachement }));
-		} else {
-			formData.append("message", JSON.stringify({ title, content }));
-		}
+	console.log(comments);
 
-		axios
-			.put(`http://localhost:5000/api/messages/${recupIdPage[1]}`, formData)
-			.then(function (res) {
-				console.log(`message modifié `);
-				alert("Message modifié");
-				window.location.href = "http://localhost:3000/home";
-				console.log(res);
-			});
-	};
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
+
+	// 	axios
+	// 		.post(`http://localhost:5000/api/comments/${recupIdPage[1]}`, {
+	// 			messageId: messageId,
+	// 			userId: userId,
+	// 			content: content
+	// 		})
+	// 		.then(function (res) {
+	// 			console.log(`commentaire envoyé `);
+	// 			alert("commentaire envoyé");
+	// 			window.location.href = "http://localhost:3000/home";
+	// 			console.log(res);
+	// 		});
+	// };
 
 	useEffect(() => {
 		getMessageDetails();
 	}, []);
 
-	function changeImg() {
-		var selectId = document.getElementById("messageImg");
-		selectId.src = null;
-		setAttachement(null);
-		setAsChanged(true);
-	}
+	const booleanSwitch = (varSwitch) => {
+		if (varSwitch) {
+			setShowCommentForm(false);
+		} else setShowCommentForm(true);
+	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<div>
 				<div className="hp_container1">
 					<div className="backgroundPic2">
 						<h1 className="hp_mainTitle">Message </h1>
 
+						<div className="createMessage">
+							<button
+								onClick={() => booleanSwitch(showCommentForm)}
+								className="newBtn"
+							>
+								Nouveau commentaire
+							</button>
+
+							{showCommentForm ? (
+								<AddComments messageId={messageId} userId={userId} />
+							) : null}
+						</div>
 						<div className="homepage_container">
 							<div className="hp_messagesBox">
 								<div className="hp_blocText">
@@ -88,14 +96,26 @@ const Message = () => {
 											id="messageImg"
 										></img>
 									</div>
-
 									<h4>{messages.content}</h4>
 								</div>
+							</div>
+
+							<div className="CommentsBox">
+								{comments.map((comment) => {
+									return (
+										<div key={comment.id} className="hp_messagesBox">
+											<h3>{comment.content}</h3>
+											<h5 className="hp_created">
+												Created : {moment(comment.createdAt).fromNow()}
+											</h5>
+										</div>
+									);
+								})}
 							</div>
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
 		</>
 	);
 };

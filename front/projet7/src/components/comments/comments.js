@@ -4,17 +4,14 @@ import { useState } from "react";
 import "./addComments.css";
 
 const AddComments = (props) => {
-	let urlMessages = window.location.href;
-	let recupIdPage = urlMessages.split("messages/");
-	let userId = props.currentUser;
-	let messageId = recupIdPage[1];
-	console.log(recupIdPage);
+	let userId = props.userId;
+	let messageId = props.messageId;
 	const [content, setContent] = useState("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (title && content !== "") {
+		if (content !== "" && messageId !== "" && userId !== "") {
 			axios
 				.post("http://localhost:5000/api/comments", {
 					userId: userId,
@@ -34,23 +31,12 @@ const AddComments = (props) => {
 		<>
 			<form className="formNewMessage1" onSubmit={handleSubmit}>
 				<div>
-					<input
-						type="messageTitle"
-						name="messageTitle"
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-						placeholder="Titre du message"
-						className="inputBlocTitle"
-					/>
-				</div>
-
-				<div>
 					<textarea
 						type="text"
-						name="messagecontent"
+						name="commentcontent"
 						value={content}
 						onChange={(e) => setContent(e.target.value)}
-						placeholder=" Tapez votre message"
+						placeholder=" Tapez votre commentaire"
 						className="inputBlocContent"
 					/>
 				</div>
