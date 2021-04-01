@@ -76,7 +76,7 @@ exports.deleteMessage = (req, res, next) => {
 		}
 	})
 		.then((message) => {
-			if (message.attachement) {
+			if (message.attachement !== null) {
 				const filename = message.attachement.split("/images/")[1];
 				fs.unlink(`images/${filename}`, () => {
 					db.Message.destroy({

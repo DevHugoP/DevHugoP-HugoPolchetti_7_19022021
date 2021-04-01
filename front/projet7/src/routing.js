@@ -3,6 +3,7 @@ import Login from "./components/auth/login/Login";
 import Signup from "./components/auth/signup/Signup";
 import Home from "./components/homepage/homepage";
 import ModifyMessage from "./components/message/modifyMessage";
+import Message from "./components/message/messages";
 
 //TOOLS
 import AuthRoute from "./components/auth/AuthRoute";
@@ -31,7 +32,8 @@ const ReactRouterSetup = () => {
 	if (token) {
 		const decodedToken = jwtDecode(token);
 		localStorage.setItem("currentUser", decodedToken.where.userId);
-	}
+	} else localStorage.clear();
+
 	return (
 		<Router history={history}>
 			<AuthRoute
@@ -47,6 +49,7 @@ const ReactRouterSetup = () => {
 				authenticated={authenticated}
 			></AuthRoute>
 			<Route exact path="/home" component={Home}></Route>
+			<Route path="/messages" component={Message}></Route>
 			<Route path="/modifyMessage" component={ModifyMessage}></Route>
 		</Router>
 	);

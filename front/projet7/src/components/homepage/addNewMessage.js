@@ -62,9 +62,14 @@ const AddNewMessage = (props) => {
 				</div>
 
 				<label htmlFor="file">
-					<input type="file" name="file" onChange={(e) => setImage(e.target.files[0])} />
+					<input
+						type="file"
+						name="file"
+						className="preview"
+						onChange={(e) => setImage(e.target.files[0])}
+					/>
 				</label>
-				<img alt="Aperçu de l’image..." />
+				<img className="previewAdd" alt="Aperçu de l’image..." />
 
 				<div>
 					<textarea
