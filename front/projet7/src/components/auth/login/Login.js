@@ -6,7 +6,7 @@ import "./Login.css";
 import history from "../../../history";
 import Main from "../../mainPage/Main";
 
-const Login = (props) => {
+const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 

@@ -32,6 +32,7 @@ const ReactRouterSetup = () => {
 	// Ici on va stocker l'identité du user grace au token qui nous donne le userId afin de donner certaines permissions
 	if (token) {
 		const decodedToken = jwtDecode(token);
+		console.log(decodedToken);
 		localStorage.setItem("currentUser", decodedToken.where.userId);
 	} else {
 		localStorage.clear();

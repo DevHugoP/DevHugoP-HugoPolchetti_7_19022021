@@ -8,7 +8,7 @@ const { Sequelize } = require("sequelize");
 const multer = require("multer");
 
 // Connexion DB
-const sequelize = new Sequelize("database_development2", "root", "polchetti59", {
+const sequelize = new Sequelize("database_development", "root", "polchetti59", {
 	host: "localhost",
 	dialect: "mysql"
 });

@@ -26,7 +26,7 @@ const Signup = () => {
 					console.log(`bienvenue ${username}`);
 					console.log(res.data.token);
 					localStorage.setItem("Token", `Bearer ${res.data.token}`);
-					history.push("/home");
+					window.location.href = "http://localhost:3000/home";
 				});
 		} else if (password !== confirmPassword && password !== "" && confirmPassword !== "") {
 			console.log("les mots de passe ne sont pas identiques ");

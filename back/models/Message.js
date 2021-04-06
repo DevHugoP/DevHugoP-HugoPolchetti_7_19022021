@@ -4,9 +4,7 @@ const User = require("./User");
 module.exports = (sequelize, DataTypes) => {
 	class Message extends Model {
 		static associate(models) {
-			models.Message.belongsTo(models.User, {
-				foreignKey: "userId"
-			});
+			models.Message.belongsTo(models.User, {});
 			models.Message.hasMany(models.Comment);
 		}
 	}

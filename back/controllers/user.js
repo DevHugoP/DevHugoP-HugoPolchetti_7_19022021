@@ -68,3 +68,13 @@ exports.getUserData = (req, res, next) => {
 			});
 		});
 };
+
+exports.deleteUser = (req, res, next) => {
+	db.User.destroy({
+		where: {
+			id: req.params.id
+		}
+	})
+		.then((res) => res.status(200).json("compte utilisateur supprimé"))
+		.catch((err) => res.status(400).json(" err"));
+};
