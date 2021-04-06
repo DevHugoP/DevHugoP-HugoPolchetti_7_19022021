@@ -24,8 +24,8 @@ exports.getMultipleComment = (req, res, next) => {
 		},
 		include: [{ model: db.User }]
 	})
-		.then((message) => {
-			res.status(200).json(message);
+		.then((comment) => {
+			res.status(200).json(comment);
 		})
 		.catch((error) => {
 			res.status(404).json({

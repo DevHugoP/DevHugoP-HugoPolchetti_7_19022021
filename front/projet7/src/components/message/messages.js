@@ -30,14 +30,21 @@ const Message = () => {
 			setTitle(res.data.title);
 			setContent(res.data.content);
 			setMessageId(res.data.id);
-			setComments(res.data.Comments);
 		});
 	};
 
-	console.log(comments);
+	const getCommentsDetails = () => {
+		axios
+			.get(`http://localhost:5000/api/comments/message/${recupIdPage[1]}`)
+			.then(function (res) {
+				console.log(res.data);
+				setComments(res.data);
+			});
+	};
 
 	useEffect(() => {
 		getMessageDetails();
+		getCommentsDetails();
 	}, []);
 
 	const booleanSwitch = (varSwitch) => {
@@ -51,6 +58,7 @@ const Message = () => {
 			console.log("suppression réussie");
 			alert("suppression réussie");
 			getMessageDetails();
+			getCommentsDetails();
 		});
 	};
 
@@ -96,6 +104,9 @@ const Message = () => {
 								{comments.map((comment) => {
 									return (
 										<div key={comment.id} className="comments">
+											<h4 className="cmt_username">
+												{comment.User.username}
+											</h4>
 											<h3>{comment.content}</h3>
 											<h5 className="created">
 												Created : {moment(comment.createdAt).fromNow()}

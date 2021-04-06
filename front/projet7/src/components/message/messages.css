@@ -45,3 +45,12 @@
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
 		"Open Sans", "Helvetica Neue", sans-serif;
 }
+
+.cmt_username {
+	font-size: 1.1rem;
+	position: relative;
+	right: 40%;
+	border: solid black 1px;
+	border-radius: 12px;
+	padding: 0.8rem;
+}
