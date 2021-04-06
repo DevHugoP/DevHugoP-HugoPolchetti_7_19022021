@@ -14,6 +14,26 @@ exports.createComment = async (req, res, next) => {
 	console.log(req.body);
 };
 
+exports.getMultipleComment = (req, res, next) => {
+	console.log(req.params);
+	// req.params contient ce qu'il y a dans l'uri => faire une requette
+	console.log(req.params.id);
+	db.Comment.findAll({
+		where: {
+			messageId: req.params.id
+		},
+		include: [{ model: db.User }]
+	})
+		.then((message) => {
+			res.status(200).json(message);
+		})
+		.catch((error) => {
+			res.status(404).json({
+				error: error
+			});
+		});
+};
+
 exports.getAllComment = (req, res, next) => {
 	db.Comment.findAll({
 		include: [{ model: db.User }, { model: db.Message }]

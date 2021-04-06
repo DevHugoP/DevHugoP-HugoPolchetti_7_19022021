@@ -21,7 +21,7 @@ const AddComments = (props) => {
 				.then(function (res) {
 					console.log(`commentaire envoyé `);
 					setContent("");
-					alert("Message Envoyé");
+					alert("Commentaire Envoyé");
 					window.location.reload();
 				});
 		} else console.log("il manque des infos ");

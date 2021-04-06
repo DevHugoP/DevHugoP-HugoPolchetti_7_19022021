@@ -11,6 +11,7 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import jwtDecode from "jwt-decode";
+import { useState, useEffect } from "react";
 
 const ReactRouterSetup = () => {
 	//logique AUTHENFICATION// permet de rediriger l'utilisateur si il clique sur login ou signup en etant co ou le rediriger vers les pages de connexions lorsque son token expire
@@ -32,28 +33,30 @@ const ReactRouterSetup = () => {
 	if (token) {
 		const decodedToken = jwtDecode(token);
 		localStorage.setItem("currentUser", decodedToken.where.userId);
-	} else localStorage.clear();
-
-	if (localStorage.length === 0) {
-		window.location.href = "http://localhost:3000/login";
+	} else {
+		localStorage.clear();
 	}
+
 	return (
 		<Router history={history}>
+			<Route exact path="/login" component={Login} authenticated={authenticated}></Route>
+			<Route exact path="/signup" component={Signup} authenticated={authenticated}></Route>
 			<AuthRoute
 				exact
-				path="/login"
-				component={Login}
+				path="/home"
+				component={Home}
 				authenticated={authenticated}
 			></AuthRoute>
 			<AuthRoute
-				exact
-				path="/signup"
-				component={Signup}
+				path="/messages"
+				component={Message}
 				authenticated={authenticated}
 			></AuthRoute>
-			<Route exact path="/home" component={Home}></Route>
-			<Route path="/messages" component={Message}></Route>
-			<Route path="/modifyMessage" component={ModifyMessage}></Route>
+			<AuthRoute
+				path="/modifyMessage"
+				component={ModifyMessage}
+				authenticated={authenticated}
+			></AuthRoute>
 		</Router>
 	);
 };

@@ -5,6 +5,7 @@ import axios from "axios";
 import history from "../../history";
 import moment from "moment";
 import AddComments from "./../comments/comments";
+import "./messages.css";
 
 const Message = () => {
 	//récuperation de l'identité du user
@@ -35,23 +36,6 @@ const Message = () => {
 
 	console.log(comments);
 
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
-
-	// 	axios
-	// 		.post(`http://localhost:5000/api/comments/${recupIdPage[1]}`, {
-	// 			messageId: messageId,
-	// 			userId: userId,
-	// 			content: content
-	// 		})
-	// 		.then(function (res) {
-	// 			console.log(`commentaire envoyé `);
-	// 			alert("commentaire envoyé");
-	// 			window.location.href = "http://localhost:3000/home";
-	// 			console.log(res);
-	// 		});
-	// };
-
 	useEffect(() => {
 		getMessageDetails();
 	}, []);
@@ -60,6 +44,14 @@ const Message = () => {
 		if (varSwitch) {
 			setShowCommentForm(false);
 		} else setShowCommentForm(true);
+	};
+
+	const deleteMyComment = (id) => {
+		axios.delete("http://localhost:5000/api/comments/" + `${id}`).then(function (res) {
+			console.log("suppression réussie");
+			alert("suppression réussie");
+			getMessageDetails();
+		});
 	};
 
 	return (
@@ -99,15 +91,25 @@ const Message = () => {
 									<h4>{messages.content}</h4>
 								</div>
 							</div>
-
-							<div className="CommentsBox">
+							<h3 className="commentsTitle">COMMENTAIRES</h3>
+							<div className="commentsBox">
 								{comments.map((comment) => {
 									return (
-										<div key={comment.id} className="hp_messagesBox">
+										<div key={comment.id} className="comments">
 											<h3>{comment.content}</h3>
-											<h5 className="hp_created">
+											<h5 className="created">
 												Created : {moment(comment.createdAt).fromNow()}
 											</h5>
+											<div>
+												{comment.UserId == userId ? (
+													<button
+														className="cmt_deleteBtn"
+														onClick={() => deleteMyComment(comment.id)}
+													>
+														Supprimer
+													</button>
+												) : null}
+											</div>
 										</div>
 									);
 								})}
