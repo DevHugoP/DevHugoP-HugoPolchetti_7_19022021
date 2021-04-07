@@ -5,6 +5,7 @@ import "./addNewMessage.css";
 
 const AddNewMessage = (props) => {
 	let userId = props.currentUser;
+	console.log(props);
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState("");

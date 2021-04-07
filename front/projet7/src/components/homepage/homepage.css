@@ -96,7 +96,8 @@
 }
 
 .hp_content {
-	padding: 3%;
+	padding: 5%;
+	font-size: 1.1rem;
 }
 
 .hp_messagesBox {
@@ -107,13 +108,14 @@
 	background-color: white;
 	border-radius: 1rem 1rem 1rem 1rem;
 	box-shadow: 0 0 16px #0000002e;
-	width: 700px;
+	width: 600px;
+	height: fit-content;
 }
 .hp_imageBox {
 	display: flex;
 	border-radius: 1rem 1rem 1rem 1rem;
 	box-shadow: 0 0 16px #0000002e;
-	max-width: 375px;
+	max-width: 280px;
 }
 .hp_img {
 	height: 100%;

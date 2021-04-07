@@ -2,7 +2,6 @@ import React from "react";
 import { Link, Redirect, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import history from "../../history";
 import moment from "moment";
 import "./homepage.css";
 import AddnewMessage from "./addNewMessage";
@@ -10,6 +9,10 @@ import AddnewMessage from "./addNewMessage";
 const Home = () => {
 	//récuperation de l'identité du user
 	let currentUser = localStorage.currentUser;
+	let isAdmin = localStorage.userStatus;
+	if (isAdmin == true) {
+		console.log("test");
+	}
 
 	const [messages, setMessages] = useState([]);
 	const [showNewMessageForm, setShowNewMessageForm] = useState(false);
@@ -97,7 +100,7 @@ const Home = () => {
 														</Link>
 													</button>
 
-													{user.id == currentUser ? (
+													{isAdmin || user.id == currentUser ? (
 														<button
 															className="hp_deleteBtn"
 															onClick={() =>

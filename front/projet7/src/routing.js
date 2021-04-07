@@ -12,6 +12,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import jwtDecode from "jwt-decode";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ReactRouterSetup = () => {
 	//logique AUTHENFICATION// permet de rediriger l'utilisateur si il clique sur login ou signup en etant co ou le rediriger vers les pages de connexions lorsque son token expire
@@ -36,6 +37,18 @@ const ReactRouterSetup = () => {
 		localStorage.setItem("currentUser", decodedToken.where.userId);
 	} else {
 		localStorage.clear();
+	}
+
+	let currentUser = localStorage.currentUser;
+	const [userIsAdmin, setUserIsAdmin] = useState();
+
+	if (currentUser) {
+		axios.get("http://localhost:5000/api/auth/user/" + `${currentUser}`).then(function (res) {
+			if (res.data.isAdmin == true) {
+				setUserIsAdmin(true);
+				localStorage.setItem("userStatus", userIsAdmin);
+			}
+		});
 	}
 
 	return (
