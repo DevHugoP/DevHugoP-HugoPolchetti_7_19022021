@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import "./homepage.css";
 import AddnewMessage from "./addNewMessage";
+import LogInfos from "./logInfos";
 
 const Home = () => {
 	//récuperation de l'identité du user
@@ -43,18 +44,11 @@ const Home = () => {
 		} else setShowNewMessageForm(true);
 	};
 
-	const deconnexion = () => {
-		localStorage.clear();
-		window.location.href = "http://localhost:3000/login";
-	};
-
 	return (
 		<>
 			<div className="hp_container1">
 				<div className="backgroundPic2">
-					<button className="logOutBtn" onClick={() => deconnexion()}>
-						Deconnexion
-					</button>
+					<LogInfos currentUser={currentUser} />
 					<h1 className="hp_mainTitle"> Messages Recents </h1>
 					<div className="createMessage">
 						<button

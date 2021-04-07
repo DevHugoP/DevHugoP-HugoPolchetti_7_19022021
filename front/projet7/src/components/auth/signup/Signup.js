@@ -5,6 +5,7 @@ import "./Signup.css";
 import axios from "axios";
 import history from "../../../history";
 import Main from "../../mainPage/Main";
+import jwtDecode from "jwt-decode";
 const Signup = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -26,6 +27,13 @@ const Signup = () => {
 					console.log(`bienvenue ${username}`);
 					console.log(res.data.token);
 					localStorage.setItem("Token", `Bearer ${res.data.token}`);
+					const token = localStorage.Token;
+					if (token) {
+						const decodedToken = jwtDecode(token);
+						console.log(decodedToken);
+						localStorage.setItem("currentUser", decodedToken.where.userId);
+					} else {
+					}
 					window.location.href = "http://localhost:3000/home";
 				});
 		} else if (password !== confirmPassword && password !== "" && confirmPassword !== "") {

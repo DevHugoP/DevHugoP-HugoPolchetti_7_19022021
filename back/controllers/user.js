@@ -2,7 +2,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const db = require("../models");
+const jwtDecode = require("jwt-decode");
 exports.signup = (req, res, next) => {
+	let userIdtest;
+	let decodedtoken;
 	bcrypt
 		.hash(req.body.password, 10)
 		.then((hash) => {
@@ -12,9 +15,10 @@ exports.signup = (req, res, next) => {
 				email: req.body.email,
 				isAdmin: req.body.isAdmin
 			})
-				.then(() =>
+				.then((user) =>
 					res.status(201).json({
 						message: "Utilisateur créé !",
+						userId: user.id,
 						token: jwt.sign({ where: { userId: user.id } }, "RANDOM_TOKEN_SECRET", {
 							expiresIn: "24h"
 						})
@@ -75,6 +79,6 @@ exports.deleteUser = (req, res, next) => {
 			id: req.params.id
 		}
 	})
-		.then((res) => res.status(200).json("compte utilisateur supprimé"))
-		.catch((err) => res.status(400).json(" err"));
+		.then((res) => res.status(204).json("compte utilisateur supprimé"))
+		.catch((err) => res.status(400).json(err));
 };
