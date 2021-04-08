@@ -4,8 +4,6 @@ const User = require("../models/User");
 const db = require("../models");
 const jwtDecode = require("jwt-decode");
 exports.signup = (req, res, next) => {
-	let userIdtest;
-	let decodedtoken;
 	bcrypt
 		.hash(req.body.password, 10)
 		.then((hash) => {
