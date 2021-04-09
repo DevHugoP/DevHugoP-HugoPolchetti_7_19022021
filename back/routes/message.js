@@ -6,10 +6,10 @@ const multer = require("../middleware/multer-config");
 
 const stuffCtrl = require("../controllers/message");
 
-router.get("/", stuffCtrl.getAllMessage);
-router.post("/", multer, stuffCtrl.createMessage);
-router.get("/:id", stuffCtrl.getOneMessage);
-router.put("/:id", multer, stuffCtrl.modifyMessage);
-router.delete("/:id", stuffCtrl.deleteMessage);
+router.get("/", auth, stuffCtrl.getAllMessage);
+router.post("/", auth, multer, stuffCtrl.createMessage);
+router.get("/:id", auth, stuffCtrl.getOneMessage);
+router.put("/:id", auth, multer, stuffCtrl.modifyMessage);
+router.delete("/:id", auth, stuffCtrl.deleteMessage);
 
 module.exports = router;

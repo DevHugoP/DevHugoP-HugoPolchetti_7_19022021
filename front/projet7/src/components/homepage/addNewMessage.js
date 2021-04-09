@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./addNewMessage.css";
 
 const AddNewMessage = (props) => {
+	let token = localStorage.Token;
 	let userId = props.currentUser;
 	console.log(props);
 	const [title, setTitle] = useState("");
@@ -19,13 +20,24 @@ const AddNewMessage = (props) => {
 		formData.append("message", JSON.stringify({ userId, title, content }));
 
 		if (title && content !== "") {
-			axios.post("http://localhost:5000/api/messages", formData).then(function (res) {
-				console.log(`message envoyé `);
-				setTitle("");
-				setContent("");
-				alert("Message Envoyé");
-				window.location.reload();
-			});
+			axios
+				.post(
+					"http://localhost:5000/api/messages",
+
+					formData,
+					{
+						headers: {
+							Authorization: token
+						}
+					}
+				)
+				.then(function (res) {
+					console.log(`message envoyé `);
+					setTitle("");
+					setContent("");
+					alert("Message Envoyé");
+					window.location.reload();
+				});
 		} else console.log("il manque des infos ");
 	};
 

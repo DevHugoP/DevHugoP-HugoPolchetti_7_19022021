@@ -11,6 +11,7 @@ const Home = () => {
 	//récuperation de l'identité du user
 	let currentUser = localStorage.currentUser;
 	let isAdmin = localStorage.userStatus;
+	let token = localStorage.Token;
 	if (isAdmin == true) {
 		console.log("test");
 	}
@@ -19,11 +20,17 @@ const Home = () => {
 	const [showNewMessageForm, setShowNewMessageForm] = useState(false);
 
 	const getMessages = () => {
-		axios.get("http://localhost:5000/api/messages").then(function (res) {
-			const messages = res.data;
-			console.log(res.data);
-			setMessages(messages.messages);
-		});
+		axios
+			.get("http://localhost:5000/api/messages", {
+				headers: {
+					Authorization: token
+				}
+			})
+			.then(function (res) {
+				const messages = res.data;
+				console.log(res.data);
+				setMessages(messages.messages);
+			});
 	};
 
 	useEffect(() => {
@@ -31,11 +38,17 @@ const Home = () => {
 	}, []);
 
 	const deleteMyMessage = (id) => {
-		axios.delete("http://localhost:5000/api/messages/" + `${id}`).then(function (res) {
-			console.log("suppression réussie");
-			alert("suppression réussie");
-			getMessages();
-		});
+		axios
+			.delete("http://localhost:5000/api/messages/" + `${id}`, {
+				headers: {
+					Authorization: token
+				}
+			})
+			.then(function (res) {
+				console.log("suppression réussie");
+				alert("suppression réussie");
+				getMessages();
+			});
 	};
 
 	const booleanSwitch = (varSwitch) => {

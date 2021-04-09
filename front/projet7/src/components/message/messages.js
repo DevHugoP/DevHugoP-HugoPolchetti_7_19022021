@@ -10,6 +10,7 @@ import "./messages.css";
 const Message = () => {
 	//récuperation de l'identité du user
 	let userId = localStorage.currentUser;
+	let token = localStorage.Token;
 
 	const [messages, setMessages] = useState([]);
 	const [messageId, setMessageId] = useState("");
@@ -23,19 +24,29 @@ const Message = () => {
 	let recupIdPage = urlMessages.split("messages/");
 
 	const getMessageDetails = () => {
-		axios.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`).then(function (res) {
-			console.log(res.data);
-			setMessages(res.data);
-			setUser(res.data.User.username);
-			setTitle(res.data.title);
-			setContent(res.data.content);
-			setMessageId(res.data.id);
-		});
+		axios
+			.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`, {
+				headers: {
+					Authorization: token
+				}
+			})
+			.then(function (res) {
+				console.log(res.data);
+				setMessages(res.data);
+				setUser(res.data.User.username);
+				setTitle(res.data.title);
+				setContent(res.data.content);
+				setMessageId(res.data.id);
+			});
 	};
 
 	const getCommentsDetails = () => {
 		axios
-			.get(`http://localhost:5000/api/comments/message/${recupIdPage[1]}`)
+			.get(`http://localhost:5000/api/comments/message/${recupIdPage[1]}`, {
+				headers: {
+					Authorization: token
+				}
+			})
 			.then(function (res) {
 				console.log(res.data);
 				setComments(res.data);
@@ -54,12 +65,18 @@ const Message = () => {
 	};
 
 	const deleteMyComment = (id) => {
-		axios.delete("http://localhost:5000/api/comments/" + `${id}`).then(function (res) {
-			console.log("suppression réussie");
-			alert("suppression réussie");
-			getMessageDetails();
-			getCommentsDetails();
-		});
+		axios
+			.delete("http://localhost:5000/api/comments/" + `${id}`, {
+				headers: {
+					Authorization: token
+				}
+			})
+			.then(function (res) {
+				console.log("suppression réussie");
+				alert("suppression réussie");
+				getMessageDetails();
+				getCommentsDetails();
+			});
 	};
 
 	return (

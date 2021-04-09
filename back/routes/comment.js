@@ -6,11 +6,10 @@ const multer = require("../middleware/multer-config");
 
 const stuffCtrlComment = require("../controllers/comment");
 
-router.get("/", stuffCtrlComment.getAllComment);
-router.get("/message/:id", stuffCtrlComment.getMultipleComment);
-router.post("/", stuffCtrlComment.createComment);
-router.get("/:id", stuffCtrlComment.getOneComment);
-router.put("/:id", multer, stuffCtrlComment.modifyComment);
-router.delete("/:id", stuffCtrlComment.deleteComment);
+router.get("/", auth, stuffCtrlComment.getAllComment);
+router.get("/message/:id", auth, stuffCtrlComment.getMultipleComment);
+router.post("/", auth, stuffCtrlComment.createComment);
+router.get("/:id", auth, stuffCtrlComment.getOneComment);
+router.delete("/:id", auth, stuffCtrlComment.deleteComment);
 
 module.exports = router;

@@ -5,14 +5,35 @@ const db = require("../models");
 exports.createComment = async (req, res, next) => {
 	console.log(req.body.userId);
 	const commentObject = req.body;
-	const comment = await db.Comment.create({
+	await db.Comment.create({
 		userId: commentObject.userId,
 		messageId: commentObject.messageId,
 		content: commentObject.content
-	});
-	res.status(200).json(comment);
-	console.log(req.body);
+	})
+		.then((comment) => {
+			res.status(200).json(comment);
+		})
+		.catch((error) => {
+			res.status(404).json({ error: error });
+		});
 };
+// exports.createComment = async (req, res, next) => {
+// 	const commentObject = JSON.parse(req.body.comment);
+// 	const comment = await db.Comment.create({
+// 		userId: commentObject.userId,
+// 		messageId: commentObject.messageId,
+// 		content: commentObject.content
+// 	})
+
+// 		.then((comment) => {
+// 			res.status(200).json(comment);
+// 		})
+// 		.catch((error) => {
+// 			res.status(404).json({
+// 				error: error
+// 			});
+// 		});
+// };
 
 exports.getMultipleComment = (req, res, next) => {
 	console.log(req.params);

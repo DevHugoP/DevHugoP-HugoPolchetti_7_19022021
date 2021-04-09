@@ -4,7 +4,9 @@ import { useState } from "react";
 import "./addComments.css";
 
 const AddComments = (props) => {
-	let userId = props.userId;
+	let token = localStorage.Token;
+	let userId = parseInt(props.userId);
+	console.log(userId);
 	let messageId = props.messageId;
 	const [content, setContent] = useState("");
 
@@ -13,12 +15,21 @@ const AddComments = (props) => {
 
 		if (content !== "" && messageId !== "" && userId !== "") {
 			axios
-				.post("http://localhost:5000/api/comments", {
-					userId: userId,
-					messageId: messageId,
-					content: content
-				})
+				.post(
+					"http://localhost:5000/api/comments",
+					{
+						userId: userId,
+						messageId: messageId,
+						content: content
+					},
+					{
+						headers: {
+							Authorization: token
+						}
+					}
+				)
 				.then(function (res) {
+					console.log(res);
 					console.log(`commentaire envoyé `);
 					setContent("");
 					alert("Commentaire Envoyé");

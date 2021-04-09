@@ -7,6 +7,7 @@ import moment from "moment";
 import "./modifyMessage.css";
 
 const ModifyMessage = () => {
+	let token = localStorage.Token;
 	const [messages, setMessages] = useState([]);
 	const [user, setUser] = useState("");
 	const [title, setTitle] = useState("");
@@ -20,18 +21,24 @@ const ModifyMessage = () => {
 	let recupIdPage = urlMessages.split("Message/");
 
 	const getMessageDetails = () => {
-		axios.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`).then(function (res) {
-			console.log(res.data);
-			setMessages(res.data);
-			setUser(res.data.User.username);
-			setTitle(res.data.title);
-			setContent(res.data.content);
-			if (res.data.attachement == null) {
-				setShowBtn(false);
-			} else {
-				setShowBtn(true);
-			}
-		});
+		axios
+			.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`, {
+				headers: {
+					Authorization: token
+				}
+			})
+			.then(function (res) {
+				console.log(res.data);
+				setMessages(res.data);
+				setUser(res.data.User.username);
+				setTitle(res.data.title);
+				setContent(res.data.content);
+				if (res.data.attachement == null) {
+					setShowBtn(false);
+				} else {
+					setShowBtn(true);
+				}
+			});
 	};
 
 	const handleSubmit = (e) => {
@@ -47,7 +54,16 @@ const ModifyMessage = () => {
 		}
 
 		axios
-			.put(`http://localhost:5000/api/messages/${recupIdPage[1]}`, formData)
+			.put(
+				`http://localhost:5000/api/messages/${recupIdPage[1]}`,
+
+				formData,
+				{
+					headers: {
+						Authorization: token
+					}
+				}
+			)
 			.then(function (res) {
 				console.log(`message modifié `);
 				alert("Message modifié");
