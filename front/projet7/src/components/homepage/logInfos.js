@@ -4,6 +4,7 @@ import axios from "axios";
 import "./loginfos.css";
 
 export default function LogInfos(props) {
+	let token = localStorage.Token;
 	console.log(props);
 	const deconnexion = () => {
 		localStorage.clear();
@@ -24,7 +25,11 @@ export default function LogInfos(props) {
 
 	const deleteAccount = () => {
 		axios
-			.delete("http://localhost:5000/api/auth/user/" + `${currentUser}`)
+			.delete("http://localhost:5000/api/auth/user/" + `${currentUser}`, {
+				headers: {
+					Authorization: token
+				}
+			})
 			.then(function (res) {
 				console.log(res);
 			});
