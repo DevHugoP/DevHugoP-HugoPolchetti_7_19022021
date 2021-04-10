@@ -49,16 +49,16 @@ CREATION DE LA BDD :
 
 il manque à injecter les données contenues sur le fichier db.sql (à faire ) via importer sur PHPMydmin soit via la commande :
 
-mysql > USE database_development
-mysql > SOURCE db.sql (route du fichier)
+      mysql > USE database_development
+      mysql > SOURCE db.sql (route du fichier)
 
 après cette étape il reste à démarer l'ensemble en allant dans le dossier back et taper la commande :
 
-nodemon server 
+      nodemon server 
 
 et dans le dossier front taper la commande :
 
-npm start 
+      npm start 
 
 
 Le site se lance sur le navigateur ! 
