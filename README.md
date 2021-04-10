@@ -32,7 +32,7 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 - moment : npm install moment
 
 
-lorsque l'ensembles des packages ont été installés dans les dossiers concernés (back et front), il faut mettre en oeurvre la base de donnée sur MySQL (penser à mettre dans le fichier back/app.js les identifiants de la BDD crée afin de la connecter au back via SEQUELIZE )
+Lorsque l'ensembles des packages ont été installés dans les dossiers concernés (back et front), il faut mettre en oeurvre la base de donnée sur MySQL (penser à mettre dans le fichier back/app.js les identifiants de la BDD crée afin de la connecter au back via SEQUELIZE )
 
 CREATION DE LA BDD : 
 
@@ -40,9 +40,9 @@ CREATION DE LA BDD :
 
         CREATE DATABASE database_development;
  
- (le nom 'database_development'est important car certains fichiers de config de la migration sont nommés ainsi  )
+ (le nom 'database_development' est important car certains fichiers de config de la migration sont nommés ainsi  )
 
-- après avoir crée la BDD via le terminal aller dans le dossier Back et utiliser la commande :   
+- Après avoir crée la BDD via le terminal aller dans le dossier Back et utiliser la commande :   
 
        npm sequelize db:migrate
                       
@@ -54,16 +54,16 @@ CREATION DE LA BDD :
         SHOW TABLES;                    => on voit les tables créées avec leurs noms (comments, messages, users)
 
 
-il manque à injecter les données contenues sur le fichier db.sql (à faire ) via importer sur PHPMydmin soit via la commande :
+Il manque à injecter les données contenues sur le fichier db.sql (à faire ) via importer sur PHPMydmin soit via la commande :
 
         mysql > USE database_development
         mysql > SOURCE db.sql (route du fichier)
 
-après cette étape il reste à démarer l'ensemble en allant dans le dossier back et taper la commande :
+Après cette étape il reste à démarer l'ensemble en allant dans le dossier back et taper la commande :
 
        nodemon server 
 
-et dans le dossier front taper la commande :
+Et dans le dossier front taper la commande :
 
        npm start 
 
