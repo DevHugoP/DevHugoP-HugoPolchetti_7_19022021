@@ -36,9 +36,16 @@ lorsque l'ensembles des packages ont été installés dans les dossiers concern�
 
 CREATION DE LA BDD : 
 
-- Créer une base de donnée dans MySQL avec la commande : CREATE DATABASE database_development; (le nom 'database_development'est important car certains fichiers de config de la migration sont nommés ainsi  )
+- Créer une base de donnée dans MySQL avec la commande :
 
-- après avoir crée la BDD via le terminal aller dans le dossier Back et utiliser la commande : npm sequelize db:migrate
+      CREATE DATABASE database_development;
+ 
+ (le nom 'database_development'est important car certains fichiers de config de la migration sont nommés ainsi  )
+
+- après avoir crée la BDD via le terminal aller dans le dossier Back et utiliser la commande :   
+
+       npm sequelize db:migrate
+                      
 (cela crée l'ensemble des tables avec leurs caracteristiques ainsi que les associations entre certaines colones via les clef étrangères)
 
 - Pour vérifier que la BDD est bien créee avec les bonnes tables dans le terminal MySQL taper les commandes : 
