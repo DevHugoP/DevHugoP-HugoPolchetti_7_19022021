@@ -5,7 +5,8 @@ const db = require("../models");
 
 exports.getAllMessage = (req, res, next) => {
 	db.Message.findAll({
-		include: [{ model: db.User }, { model: db.Comment }]
+		include: [{ model: db.User }, { model: db.Comment }],
+		order: [["createdAt", "DESC"]]
 	})
 		.then((messages) => {
 			res.status(200).json({ messages });

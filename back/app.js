@@ -1,11 +1,9 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const path = require("path");
 const messageRoutes = require("./routes/message");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
 const { Sequelize } = require("sequelize");
-const multer = require("multer");
 
 // Connexion DB
 const sequelize = new Sequelize("database_development", "root", "polchetti59", {

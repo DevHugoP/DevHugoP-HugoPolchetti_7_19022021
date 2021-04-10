@@ -17,23 +17,6 @@ exports.createComment = async (req, res, next) => {
 			res.status(404).json({ error: error });
 		});
 };
-// exports.createComment = async (req, res, next) => {
-// 	const commentObject = JSON.parse(req.body.comment);
-// 	const comment = await db.Comment.create({
-// 		userId: commentObject.userId,
-// 		messageId: commentObject.messageId,
-// 		content: commentObject.content
-// 	})
-
-// 		.then((comment) => {
-// 			res.status(200).json(comment);
-// 		})
-// 		.catch((error) => {
-// 			res.status(404).json({
-// 				error: error
-// 			});
-// 		});
-// };
 
 exports.getMultipleComment = (req, res, next) => {
 	console.log(req.params);
@@ -43,7 +26,8 @@ exports.getMultipleComment = (req, res, next) => {
 		where: {
 			messageId: req.params.id
 		},
-		include: [{ model: db.User }]
+		include: [{ model: db.User }],
+		order: [["createdAt", "DESC"]]
 	})
 		.then((comment) => {
 			res.status(200).json(comment);
@@ -96,9 +80,6 @@ exports.deleteComment = (req, res, next) => {
 		}
 	})
 		.then((comment) => {
-			// const filename = comment.attachement.split("/images/")[1];
-			// fs.unlink(`images/${filename}`,
-			// () => {
 			db.Comment.destroy({
 				where: {
 					id: req.params.id
