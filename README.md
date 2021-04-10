@@ -50,14 +50,14 @@ CREATION DE LA BDD :
 
 - Pour vérifier que la BDD est bien créee avec les bonnes tables dans le terminal MySQL taper les commandes : 
 
-       USE database_development;             => on se place dans la database que l'on a créée 
-       SHOW TABLES;                          => on voit les tables créées avec leurs noms (comments, messages, users)
+        USE database_development;       => on se place dans la database que l'on a créée 
+        SHOW TABLES;                    => on voit les tables créées avec leurs noms (comments, messages, users)
 
 
 il manque à injecter les données contenues sur le fichier db.sql (à faire ) via importer sur PHPMydmin soit via la commande :
 
-       mysql > USE database_development
-       mysql > SOURCE db.sql (route du fichier)
+        mysql > USE database_development
+        mysql > SOURCE db.sql (route du fichier)
 
 après cette étape il reste à démarer l'ensemble en allant dans le dossier back et taper la commande :
 
@@ -65,7 +65,7 @@ après cette étape il reste à démarer l'ensemble en allant dans le dossier ba
 
 et dans le dossier front taper la commande :
 
-      npm start 
+       npm start 
 
 
 Le site se lance sur le navigateur ! 
