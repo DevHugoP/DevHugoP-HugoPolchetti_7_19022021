@@ -7,7 +7,7 @@ projet 7
 
 
 
-Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut suivre plusieurs étapes afin d'installer les packages additionnels utilisés dans le code, mettre en place la BDD MySQL et inclure des données pour injecter des données afin de simuler de l'activité.
+Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut suivre plusieurs étapes afin d'installer les packages additionnels utilisés dans le code, mettre en place la BDD MySQL et inclure des données afin de simuler de l'activité.
 
 
  ///  packages npm Back  : 
