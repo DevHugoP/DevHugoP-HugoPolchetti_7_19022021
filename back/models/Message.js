@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 	class Message extends Model {
 		static associate(models) {
 			models.Message.belongsTo(models.User, {});
-			models.Message.hasMany(models.Comment);
+			models.Message.hasMany(models.Comment, { onDelete: "CASCADE", hooks: true });
 		}
 	}
 	Message.init(
@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 			title: DataTypes.STRING,
 			content: DataTypes.TEXT,
 			attachement: DataTypes.STRING,
-			userId: DataTypes.INTEGER,
-			commentId: DataTypes.INTEGER
+			userId: DataTypes.INTEGER
 		},
 		{
 			sequelize,

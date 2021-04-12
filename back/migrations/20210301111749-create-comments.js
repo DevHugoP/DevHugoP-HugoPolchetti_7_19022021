@@ -18,8 +18,9 @@ module.exports = {
 				}
 			},
 			messageId: {
-				allowNull: true,
+				allowNull: false,
 				type: Sequelize.INTEGER,
+				onDelete: "CASCADE",
 				references: {
 					model: "Messages",
 					key: "id"

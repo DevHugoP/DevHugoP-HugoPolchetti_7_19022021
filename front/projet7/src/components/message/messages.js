@@ -9,8 +9,9 @@ import "./messages.css";
 
 const Message = () => {
 	//récuperation de l'identité du user
-	let userId = localStorage.currentUser;
 	let token = localStorage.Token;
+	let currentUser = localStorage.currentUser;
+	let isAdmin = localStorage.userStatus;
 
 	const [messages, setMessages] = useState([]);
 	const [messageId, setMessageId] = useState("");
@@ -28,6 +29,9 @@ const Message = () => {
 			.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`, {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {
@@ -42,9 +46,12 @@ const Message = () => {
 
 	const getCommentsDetails = () => {
 		axios
-			.get(`http://localhost:5000/api/comments/message/${recupIdPage[1]}`, {
+			.get(`http://localhost:5000/api/comments/from/${recupIdPage[1]}`, {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {
@@ -69,6 +76,9 @@ const Message = () => {
 			.delete("http://localhost:5000/api/comments/" + `${id}`, {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {
@@ -95,7 +105,7 @@ const Message = () => {
 							</button>
 
 							{showCommentForm ? (
-								<AddComments messageId={messageId} userId={userId} />
+								<AddComments messageId={messageId} currentUser={currentUser} />
 							) : null}
 						</div>
 						<div className="homepage_container">
@@ -129,7 +139,7 @@ const Message = () => {
 												Created : {moment(comment.createdAt).fromNow()}
 											</h5>
 											<div>
-												{comment.UserId == userId ? (
+												{isAdmin || comment.UserId == currentUser ? (
 													<button
 														className="cmt_deleteBtn"
 														onClick={() => deleteMyComment(comment.id)}

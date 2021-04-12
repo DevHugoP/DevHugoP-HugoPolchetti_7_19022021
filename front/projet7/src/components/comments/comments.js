@@ -5,7 +5,8 @@ import "./addComments.css";
 
 const AddComments = (props) => {
 	let token = localStorage.Token;
-	let userId = parseInt(props.userId);
+	let userId = parseInt(props.currentUser);
+	let currentUser = localStorage.currentUser;
 	console.log(userId);
 	let messageId = props.messageId;
 	const [content, setContent] = useState("");
@@ -25,6 +26,9 @@ const AddComments = (props) => {
 					{
 						headers: {
 							Authorization: token
+						},
+						params: {
+							currentUser
 						}
 					}
 				)

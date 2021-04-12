@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
+const owner = require("../middleware/owner");
+const modifyAndDeleteMessage = require("../middleware/modifyAndDeleteMessage");
 
 const stuffCtrl = require("../controllers/message");
 
-router.get("/", auth, stuffCtrl.getAllMessage);
-router.post("/", auth, multer, stuffCtrl.createMessage);
-router.get("/:id", auth, stuffCtrl.getOneMessage);
-router.put("/:id", auth, multer, stuffCtrl.modifyMessage);
-router.delete("/:id", auth, stuffCtrl.deleteMessage);
+router.get("/", owner, stuffCtrl.getAllMessage);
+router.post("/", owner, multer, stuffCtrl.createMessage);
+router.get("/:id", owner, stuffCtrl.getOneMessage);
+router.put("/:id", modifyAndDeleteMessage, multer, stuffCtrl.modifyMessage);
+router.delete("/:id", modifyAndDeleteMessage, stuffCtrl.deleteMessage);
 
 module.exports = router;

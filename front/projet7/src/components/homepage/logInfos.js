@@ -28,6 +28,9 @@ export default function LogInfos(props) {
 			.delete("http://localhost:5000/api/auth/user/" + `${currentUser}`, {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {

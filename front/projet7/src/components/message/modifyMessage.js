@@ -7,6 +7,7 @@ import moment from "moment";
 import "./modifyMessage.css";
 
 const ModifyMessage = () => {
+	let currentUser = localStorage.currentUser;
 	let token = localStorage.Token;
 	const [messages, setMessages] = useState([]);
 	const [user, setUser] = useState("");
@@ -25,6 +26,9 @@ const ModifyMessage = () => {
 			.get(`http://localhost:5000/api/messages/${recupIdPage[1]}`, {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {
@@ -61,6 +65,9 @@ const ModifyMessage = () => {
 				{
 					headers: {
 						Authorization: token
+					},
+					params: {
+						currentUser
 					}
 				}
 			)

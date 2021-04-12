@@ -12,9 +12,6 @@ const Home = () => {
 	let currentUser = localStorage.currentUser;
 	let isAdmin = localStorage.userStatus;
 	let token = localStorage.Token;
-	if (isAdmin == true) {
-		console.log("test");
-	}
 
 	const [messages, setMessages] = useState([]);
 	const [showNewMessageForm, setShowNewMessageForm] = useState(false);
@@ -24,6 +21,9 @@ const Home = () => {
 			.get("http://localhost:5000/api/messages", {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {
@@ -42,6 +42,9 @@ const Home = () => {
 			.delete("http://localhost:5000/api/messages/" + `${id}`, {
 				headers: {
 					Authorization: token
+				},
+				params: {
+					currentUser
 				}
 			})
 			.then(function (res) {

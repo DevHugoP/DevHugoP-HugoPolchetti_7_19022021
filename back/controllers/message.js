@@ -71,6 +71,7 @@ exports.getOneMessage = (req, res, next) => {
 };
 
 exports.deleteMessage = (req, res, next) => {
+	console.log(req.params.id);
 	db.Message.findOne({
 		where: {
 			id: req.params.id

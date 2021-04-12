@@ -6,7 +6,7 @@ import "./addNewMessage.css";
 const AddNewMessage = (props) => {
 	let token = localStorage.Token;
 	let userId = props.currentUser;
-	console.log(props);
+	let currentUser = localStorage.currentUser;
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState("");
@@ -28,6 +28,9 @@ const AddNewMessage = (props) => {
 					{
 						headers: {
 							Authorization: token
+						},
+						params: {
+							currentUser
 						}
 					}
 				)
@@ -42,7 +45,7 @@ const AddNewMessage = (props) => {
 	};
 
 	function previewFile() {
-		var preview = document.querySelector("img");
+		var preview = document.querySelector("img.previewAdd");
 		var file = image;
 		var reader = new FileReader();
 

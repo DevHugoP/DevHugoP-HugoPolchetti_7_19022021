@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("../middleware/auth");
-const multer = require("../middleware/multer-config");
+const deleteComment = require("../middleware/deleteComment");
+const owner = require("../middleware/owner");
 
 const stuffCtrlComment = require("../controllers/comment");
 
-router.get("/", auth, stuffCtrlComment.getAllComment);
-router.get("/message/:id", auth, stuffCtrlComment.getMultipleComment);
-router.post("/", auth, stuffCtrlComment.createComment);
-router.get("/:id", auth, stuffCtrlComment.getOneComment);
-router.delete("/:id", auth, stuffCtrlComment.deleteComment);
+router.get("/", owner, stuffCtrlComment.getAllComment);
+router.get("/from/:id", owner, stuffCtrlComment.getMultipleComment);
+router.post("/", owner, stuffCtrlComment.createComment);
+router.get("/:id", owner, stuffCtrlComment.getOneComment);
+router.delete("/:id", deleteComment, stuffCtrlComment.deleteComment);
 
 module.exports = router;
