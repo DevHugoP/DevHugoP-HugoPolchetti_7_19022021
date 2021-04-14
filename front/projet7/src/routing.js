@@ -53,6 +53,7 @@ const ReactRouterSetup = () => {
 
 	return (
 		<Router history={history}>
+			<Route exact path="/" component={Login} authenticated={authenticated}></Route>
 			<Route exact path="/login" component={Login} authenticated={authenticated}></Route>
 			<Route exact path="/signup" component={Signup} authenticated={authenticated}></Route>
 			<AuthRoute
