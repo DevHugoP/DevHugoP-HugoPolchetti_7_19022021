@@ -49,8 +49,8 @@ CREATION DE LA BDD :
 
 Il manque à injecter les données contenues sur le fichier insertData.sql via importer sur PHPMydmin soit via la commande :
 
-        mysql > USE database_development
-        mysql > SOURCE inserData.sql ( SOURCE  + route du fichier)
+        mysql > USE database_development;
+        mysql > SOURCE inserData.sql; ( SOURCE  + route du fichier)
 
 Après cette étape il reste à démarer l'ensemble en allant dans le dossier back et taper la commande :
 
