@@ -33,7 +33,7 @@ CREATION DE LA BDD :
 
 -   Après avoir crée la BDD via le terminal aller dans le dossier Back et utiliser la commande :
 
-          sequelize db:migrate
+          npx sequelize db:migrate
 
 (cela crée l'ensemble des tables avec leurs caracteristiques ainsi que les associations entre certaines colones via les clef étrangères)
 
