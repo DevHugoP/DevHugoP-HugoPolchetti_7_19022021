@@ -10,21 +10,16 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 /// packages npm Back :
 (il faut avoir installé node sur sa machine)
 
--   nodemon server
--   jwt (JSON WEB TOKEN) : npm install jsonwebtoken
--   multer : npm install --save multer
--   express : npm install express
--   sequelize : npm i sequelize
--   bcrypt : npm install bcrypt
--   body-parser : npm install body-parser
--   MySQL : npm install mysql
+
+- npm i 
+
+- npm install mysql2
+
+npm install --save-dev sequelize-cli
 
 //// packages npm Front :
 
--   axios : npm install axios
--   jwt-decode : npm install jwt-decode
--   history : npm install history
--   moment : npm install moment
+- npm i
 
 Lorsque l'ensembles des packages ont été installés dans les dossiers concernés (back et front), il faut mettre en oeurvre la base de donnée sur MySQL (penser à mettre dans le fichier back/app.js les identifiants de la BDD crée afin de la connecter au back via SEQUELIZE )
 
