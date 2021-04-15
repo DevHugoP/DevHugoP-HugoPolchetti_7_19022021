@@ -11,11 +11,11 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 (il faut avoir installé node sur sa machine)
 
 
-- npm -i 
+- npm i 
 
 //// packages npm Front :
 
-- npm -i
+- npm i
 
 Lorsque l'ensembles des packages ont été installés dans les dossiers concernés (back et front), il faut mettre en oeurvre la base de donnée sur MySQL (penser à mettre dans le fichier back/app.js les identifiants de la BDD crée afin de la connecter au back via SEQUELIZE )
 
