@@ -13,6 +13,10 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 
 - npm i 
 
+- npm install mysql2
+
+npm install --save-dev sequelize-cli
+
 //// packages npm Front :
 
 - npm i
