@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Signup.css";
 import axios from "axios";
-import history from "../../../history";
-import Main from "../../mainPage/Main";
 import jwtDecode from "jwt-decode";
 const Signup = () => {
 	const [email, setEmail] = useState("");
@@ -45,8 +43,18 @@ const Signup = () => {
 
 	return (
 		<>
-			<Main></Main>
-			<div>
+			<div className="backgroundPic"></div>
+			<div className="container">
+				<div className="logo_text">
+					<img
+						src="images/resize.png"
+						alt="logo de Groupomania"
+						className="logoPageAcceuil"
+					/>
+					<h2 className="acceuilTitle">
+						Avec Groupomania, partagez et restez en contact avec vos collègues
+					</h2>
+				</div>
 				<div className="blockForm2">
 					<form className="formLogin2" onSubmit={handleSubmit}>
 						<div>

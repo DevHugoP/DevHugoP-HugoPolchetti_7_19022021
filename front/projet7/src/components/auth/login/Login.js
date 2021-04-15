@@ -3,8 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.css";
-import history from "../../../history";
-import Main from "../../mainPage/Main";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -27,8 +25,18 @@ const Login = () => {
 
 	return (
 		<>
-			<Main />
-			<div className="blockLogin">
+			<div className="backgroundPic"></div>
+			<div className="container">
+				<div className="logo_text">
+					<img
+						src="images/resize.png"
+						alt="logo de Groupomania"
+						className="logoPageAcceuil"
+					/>
+					<h2 className="acceuilTitle">
+						Avec Groupomania, partagez et restez en contact avec vos collègues
+					</h2>
+				</div>
 				<div className="blockForm">
 					<form className="formLogin" onSubmit={handleSubmit}>
 						<div>

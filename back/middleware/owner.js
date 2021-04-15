@@ -4,17 +4,13 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 
 module.exports = (req, res, next) => {
-	console.log(req.query.currentUser);
 	const token = req.headers.authorization.split(" ")[1];
-	console.log(token);
 	const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
 	console.log(decodedToken);
 	const userId = decodedToken.where.userId;
-	console.log(req.body.userId);
 	console.log(userId);
 	let currentUser = req.query.currentUser;
 	let testUser = parseInt(currentUser);
-	console.log(testUser);
 
 	if (testUser !== userId) {
 		console.log(
