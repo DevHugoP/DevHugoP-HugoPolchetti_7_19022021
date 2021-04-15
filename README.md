@@ -38,7 +38,7 @@ CREATION DE LA BDD :
 
 -   Après avoir crée la BDD via le terminal aller dans le dossier Back et utiliser la commande :
 
-         npm sequelize db:migrate
+          sequelize db:migrate
 
 (cela crée l'ensemble des tables avec leurs caracteristiques ainsi que les associations entre certaines colones via les clef étrangères)
 
@@ -49,8 +49,8 @@ CREATION DE LA BDD :
 
 Il manque à injecter les données contenues sur le fichier insertData.sql via importer sur PHPMydmin soit via la commande :
 
-        mysql > USE database_development
-        mysql > SOURCE inserData.sql ( SOURCE  + route du fichier)
+        mysql > USE database_development;
+        mysql > SOURCE inserData.sql; ( SOURCE  + route du fichier)
 
 Après cette étape il reste à démarer l'ensemble en allant dans le dossier back et taper la commande :
 
