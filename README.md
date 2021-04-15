@@ -10,6 +10,7 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 /// packages npm Back :
 (il faut avoir installé node sur sa machine)
 
+
 -   nodemon server
 -   jwt (JSON WEB TOKEN) : npm install jsonwebtoken
 -   multer : npm install --save multer
@@ -21,6 +22,7 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 
 //// packages npm Front :
 
+-   Create react app
 -   axios : npm install axios
 -   jwt-decode : npm install jwt-decode
 -   history : npm install history
