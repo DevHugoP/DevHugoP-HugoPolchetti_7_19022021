@@ -11,7 +11,7 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 (il faut avoir installé node sur sa machine)
 
 
--   nodemon server
+
 -   jwt (JSON WEB TOKEN) : npm install jsonwebtoken
 -   multer : npm install --save multer
 -   express : npm install express
