@@ -52,12 +52,11 @@ export default function LogInfos(props) {
 					<button onClick={() => deleteAccount()} className="btnDelete">
 						Supprimer le compte
 					</button>
+					<button className="logOutBtn" onClick={() => deconnexion()}>
+						Deconnexion
+					</button>
 				</div>
 				<img src="images/resize.png" className="logo"></img>
-
-				<button className="logOutBtn" onClick={() => deconnexion()}>
-					Deconnexion
-				</button>
 			</div>
 		</div>
 	);

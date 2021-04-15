@@ -20,8 +20,6 @@
 }
 
 .created {
-	position: relative;
-	right: 40%;
 	display: flex;
 	flex-wrap: wrap;
 	font-size: 0.8rem;
@@ -53,4 +51,53 @@
 	border: solid black 1px;
 	border-radius: 12px;
 	padding: 0.8rem;
+}
+
+@media (max-width: 750px) {
+	.comments {
+		width: 450px;
+		height: 150px;
+		padding: 1rem;
+	}
+}
+
+@media (max-width: 550px) {
+	.comments {
+		width: 400px;
+		height: 150px;
+		padding: 1rem;
+	}
+	.commentsTitle {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 460px) {
+	.comments {
+		width: 320px;
+		height: 150px;
+		padding: 1.2rem;
+	}
+}
+
+@media (max-width: 390px) {
+	.comments {
+		width: 290px;
+		height: 150px;
+		padding: 1.2rem;
+	}
+	.oldImg {
+		width: 200px;
+	}
+}
+
+@media (max-width: 360px) {
+	.comments {
+		width: 250px;
+		height: 150px;
+		padding: 1.3rem;
+	}
+	.oldImg {
+		width: 200px;
+	}
 }

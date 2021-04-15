@@ -33,6 +33,7 @@
 	align-items: center;
 	justify-content: center;
 	color: #000000;
+	margin-bottom: 3rem;
 }
 .newBtn {
 	margin-bottom: 0.8rem;
@@ -55,8 +56,6 @@
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 1.5rem;
-	padding: 3rem 1rem;
-	padding: 3rem 1rem 4rem 1rem;
 }
 .hp_blocText {
 	display: flex;
@@ -112,7 +111,6 @@
 }
 .hp_modifiers {
 	display: flex;
-	align-items: center;
 	justify-content: space-around;
 	gap: 1.8rem;
 }
@@ -167,4 +165,57 @@
 	font-weight: 600;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
 		"Open Sans", "Helvetica Neue", sans-serif;
+}
+
+@media (max-width: 850px) {
+	.hp_messagesBox {
+		width: 500px;
+	}
+}
+
+@media (max-width: 550px) {
+	.hp_messagesBox {
+		width: 400px;
+	}
+	.hp_blocText {
+		width: auto;
+	}
+	.hp_modifiers {
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+}
+
+@media (max-width: 430px) {
+	.hp_messagesBox {
+		width: 330px;
+	}
+
+	.hp_modifiers {
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+	.hp_created {
+		right: 22%;
+	}
+	.hp_username {
+		right: 30%;
+	}
+}
+
+@media (max-width: 350px) {
+	.hp_messagesBox {
+		width: 280px;
+	}
+
+	.hp_modifiers {
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+	.hp_created {
+		right: 22%;
+	}
+	.hp_username {
+		right: 30%;
+	}
 }

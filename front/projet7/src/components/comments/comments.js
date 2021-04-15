@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import "./addComments.css";
 
 const AddComments = (props) => {
 	let token = localStorage.Token;

@@ -49,3 +49,55 @@
 	max-height: 350px;
 	display: flex;
 }
+
+@media (max-width: 540px) {
+	.hp_mainTitle {
+		font-size: 1.5rem;
+	}
+	.newBtn {
+		height: 35px;
+		width: 290px;
+		font-size: 1rem;
+	}
+	.inputBlocContent {
+		width: 350px;
+	}
+}
+
+@media (max-width: 430px) {
+	.inputBlocContent {
+		width: 300px;
+	}
+	.inputBlocTitle {
+		width: 280px;
+	}
+	.previewAdd {
+		width: 280px;
+	}
+}
+
+@media (max-width: 400px) {
+	.inputBlocContent {
+		width: 300px;
+	}
+	.inputBlocTitle {
+		width: 280px;
+	}
+}
+
+@media (max-width: 350px) {
+	.hp_mainTitle {
+		font-size: 1.3rem;
+	}
+	.newBtn {
+		width: 250px;
+	}
+	.inputBlocContent {
+		width: 250px;
+		height: 100px;
+	}
+	.inputBlocTitle {
+		width: 250px;
+		height: 18px;
+	}
+} ;

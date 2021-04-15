@@ -126,7 +126,7 @@ const Message = () => {
 									<h4>{messages.content}</h4>
 								</div>
 							</div>
-							<h3 className="commentsTitle">COMMENTAIRES</h3>
+							<h3 className="commentsTitle">Commentaires</h3>
 							<div className="commentsBox">
 								{comments.map((comment) => {
 									return (

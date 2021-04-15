@@ -50,3 +50,34 @@
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
 		"Open Sans", "Helvetica Neue", sans-serif;
 }
+
+@media (max-width: 850px) {
+	.mm_title {
+		width: 400px;
+	}
+	.mm_content {
+		width: 400px;
+	}
+}
+
+@media (max-width: 550px) {
+	.mm_title {
+		width: 300px;
+	}
+	.mm_content {
+		width: 300px;
+	}
+	.preview {
+		width: 200px;
+	}
+}
+
+@media (max-width: 430px) {
+	.mm_title {
+		width: 250px;
+		font-size: 1rem;
+	}
+	.mm_content {
+		width: 250px;
+	}
+} ;
