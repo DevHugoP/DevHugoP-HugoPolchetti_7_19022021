@@ -10,6 +10,7 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 /// packages npm Back :
 (il faut avoir installé node sur sa machine)
 
+/cd back 
 
 - npm i 
 
@@ -18,6 +19,9 @@ Pour pouvoir mettre en oeuvre le site après avoir téléchargé le code il faut
 npm install --save-dev sequelize-cli
 
 //// packages npm Front :
+
+/cd front 
+/cd projet7
 
 - npm i
 
