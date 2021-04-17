@@ -4,9 +4,14 @@ const messageRoutes = require("./routes/message");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
 const { Sequelize } = require("sequelize");
+require("dotenv").config();
+
+const bddName = process.env.BDD_NAME;
+const bddUser = process.env.BDD_USER;
+const bddPass = process.env.BDD_PASS;
 
 // Connexion DB
-const sequelize = new Sequelize("database_development", "root", "polchetti59", {
+const sequelize = new Sequelize(`${bddName}`, `${bddUser}`, `${bddPass}`, {
 	host: "localhost",
 	dialect: "mysql"
 });
