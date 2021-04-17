@@ -27,6 +27,12 @@ npm install --save-dev sequelize-cli
 
 Lorsque l'ensembles des packages ont été installés dans les dossiers concernés (back et front), il faut mettre en oeurvre la base de donnée sur MySQL (penser à mettre dans le fichier back/app.js les identifiants de la BDD crée afin de la connecter au back via SEQUELIZE )
 
+
+
+Il faut avoir au préalable télécharger MySQL sur sa machine et éventuellement phpMyAmdin si on veut avoir une interface graphique et lancer MySQL afin de pouvoir executer les lignes de commandes afficher plus bas. 
+
+
+
 CREATION DE LA BDD :
 
 -   Créer une base de donnée dans MySQL avec la commande :
